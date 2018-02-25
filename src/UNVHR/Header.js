@@ -14,6 +14,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.css';  
 import {Link} from 'react-router';
 import './Header.css';
+import logo from './logo.png';
   
 
 
@@ -35,7 +36,9 @@ import './Header.css';
       return (
         <div>
           <Navbar color="faded" light expand="md">
-            <NavbarBrand href="/">University HR</NavbarBrand>
+            <NavbarBrand href="/">
+            <img src={logo} style={{width:60, marginTop: -7, padding:'5px'}} />
+            University HR</NavbarBrand>
             <NavbarToggler onClick={this.toggle} />
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
