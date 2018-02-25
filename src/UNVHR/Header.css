@@ -1,0 +1,36 @@
+.navbar-light .navbar-nav .nav-link{
+  color:#f36e21;
+    font-size: 24px;
+}
+
+.navbar-light .navbar-nav .nav-link:hover{
+  color:black;
+}
+
+a{
+  color: black;
+  text-decoration: none!important;
+  cursor: pointer;
+}
+
+a:hover{
+  color: #f36e21
+}
+
+.navbar{
+  background: #f0eeec;
+  width: 100%;
+}
+
+.navbar-light .navbar-brand{
+  color: #f36e21;
+    font-size: 24px;
+}
+
+.navbar-light .navbar-toggler{
+  background: white;
+}
+
+.navbar-brand {
+  padding: 0px;
+}
