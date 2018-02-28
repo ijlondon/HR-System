@@ -6,8 +6,8 @@ export class Profile extends React.Component{
     super();
     this.state = {
       user: {
-        firstName: 'not loaded yet',
-        lastName: 'l not loaded yet',
+        firstName: '',
+        lastName: '',
       },
     };
   }
