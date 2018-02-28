@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.rit.group2.models.Employee;
 
-@RestController("/user")
+@RestController
+@RequestMapping("/user")
 @EnableAutoConfiguration
 public class AccountController {
 
