@@ -13,7 +13,7 @@ import com.rit.group2.models.Employee;
 @RestController
 @RequestMapping("/user")
 @EnableAutoConfiguration
-public class AccountController {
+public class EmployeeController {
 
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
     public Employee createEmployee(@RequestBody Employee employee) {
@@ -28,7 +28,8 @@ public class AccountController {
 	@RequestMapping(method = RequestMethod.POST, value = "/{userId}/edit")
     public Employee editEmployee(
     		@PathVariable("userId") int employeeId,
-    		@RequestBody Employee employee) {
+    		@RequestBody Employee employee
+    		) {
         return new Employee("Nathan", "Connor", "home", "(585) 222-1126", "nxc5929@rit.edu");
     }
 	
