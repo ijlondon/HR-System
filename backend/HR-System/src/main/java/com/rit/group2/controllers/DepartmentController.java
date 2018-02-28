@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.rit.group2.models.Department;
 import com.rit.group2.models.Employee;
 
-@RestController("/department")
+@RestController
+@RequestMapping("/department")
 @EnableAutoConfiguration
 public class DepartmentController {
 
