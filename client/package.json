@@ -5,7 +5,6 @@
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.6",
     "install": "^0.10.4",
-    "npm": "^5.6.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router": "^3.2.0",
