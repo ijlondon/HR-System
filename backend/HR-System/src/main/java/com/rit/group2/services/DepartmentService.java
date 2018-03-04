@@ -11,6 +11,7 @@ import com.rit.group2.models.Department;
 import com.rit.group2.models.Employee;
 import com.rit.group2.repositories.DepartmentRepositoy;
 import com.rit.group2.repositories.EmployeeRepository;
+import com.rit.group2.responses.ErrorResponse;
 import com.rit.group2.responses.Response;
 import com.rit.group2.responses.SuccessfulResponse;
 
@@ -34,6 +35,9 @@ public class DepartmentService {
 
 	public Response getDepartment(int departmentId) {
 		Department department = departmentRepositoy.get(departmentId);
+		if(department == null){
+			return new ErrorResponse("Can't find department");
+		}
 		return new SuccessfulResponse("Successfully retreived department", new BasicDepartment(department));
 	}
 
