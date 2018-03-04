@@ -15,7 +15,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import {Link} from 'react-router';
 import './Header.css';
 import logo from './logo.png';
-  
+import {SearchBox} from './SearchBox'
 
 
   export class Header extends React.Component {
@@ -36,10 +36,16 @@ import logo from './logo.png';
       return (
         <div>
           <Navbar color="faded" light expand="md">
-            <NavbarBrand href="/">
-            <img src={logo} style={{width:60, marginTop: -7, padding:'5px'}} />
-            University HR</NavbarBrand>
-            <NavbarToggler onClick={this.toggle} />
+            
+            <NavbarBrand href="/Home">
+                <img src={logo} style={{width:60, marginTop: -7, padding:'5px'}} />
+                University HR
+            </NavbarBrand>
+
+            <SearchBox/>
+          
+            <NavbarToggler onClick={this.toggle}/>
+          
             <Collapse isOpen={this.state.isOpen} navbar>
               <Nav className="ml-auto" navbar>
                 <NavItem>
@@ -49,7 +55,7 @@ import logo from './logo.png';
                   <NavLink href="/Departments">Departments</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink href="Profile">Profile</NavLink>
+                  <NavLink href="/Profile">Profile</NavLink>
                 </NavItem>
                 
               </Nav>
