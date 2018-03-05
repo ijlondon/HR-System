@@ -4,7 +4,7 @@
 }
 
 .navbar-light .navbar-nav .nav-link:hover{
-  color:black;
+  color:white;
 }
 
 a{
@@ -18,13 +18,17 @@ a:hover{
 }
 
 .navbar{
-  background: #f0eeec;
+  background: #333;
   width: 100%;
 }
 
 .navbar-light .navbar-brand{
   color: #f36e21;
     font-size: 24px;
+}
+
+.navbar-light .navbar-brand:hover{
+  color: white;
 }
 
 .navbar-light .navbar-toggler{
