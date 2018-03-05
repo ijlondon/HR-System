@@ -6,6 +6,7 @@
     "bootstrap": "^4.0.0-alpha.6",
     "framework7-react": "^0.9.3-2",
     "install": "^0.10.4",
+    "material-ui": "^0.20.0",
     "material-ui-search-bar": "^0.4.1",
     "react": "^16.2.0",
     "react-autobind": "^1.0.6",
