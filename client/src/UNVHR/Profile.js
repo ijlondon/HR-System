@@ -9,11 +9,26 @@ export class Profile extends React.Component{
       disabled: true,
       buttonLabel: "Edit" // inital state
     }
-    this.enableEdit = this.enableEdit.bind(this)
+    this.enableEdit = this.enableEdit.bind(this);
+    this.state = {
+      user: {
+        firstName: '',
+        lastName: '',
+      },
+    };
   }
 
   componentDidMount() {
-    this.editButton = ReactDOM.findDOMNode(this.refs.editButton)
+    this.editButton = ReactDOM.findDOMNode(this.refs.editButton);
+    fetch('http://localhost:8080/user/1')
+    .then(results => {
+      return results.json();
+    })
+    .then(data => {
+      let user = data;
+      this.setState({user: user});
+      console.log("state", this.state.user);
+    });
   }
   enableEdit() {
     this.setState({
@@ -101,9 +116,7 @@ export class Profile extends React.Component{
                 </div>
               </div>
             </div>
-            
-        </div>
-             
+          </div>
     );
   }
 };
