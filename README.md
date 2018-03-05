@@ -1,12 +1,7 @@
 
 HR-System
 ===============
-University's Human Resources Subsystem
-
-How to start the client:
-* cd to client folder
-* run `npm install`
-* run `npm start`
+University's Human Resources Backend
 
 How to start the server:
 * cd to backend/HR-System
