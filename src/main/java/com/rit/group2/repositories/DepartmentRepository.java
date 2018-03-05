@@ -7,13 +7,13 @@ import java.util.Set;
 import com.rit.group2.models.Department;
 import com.rit.group2.models.Employee;
 
-public class DepartmentRepositoy {
+public class DepartmentRepository {
 
 	private ArrayList<Department> departments;
 	
-	private static DepartmentRepositoy departmentRepository;
+	private static DepartmentRepository departmentRepository;
 	
-	public DepartmentRepositoy() {
+	public DepartmentRepository() {
 		departments = new ArrayList<>();
 		ArrayList<Employee> employees = EmployeeRepository.getInstance().getAll();
 		Set<Employee> workers = new HashSet<>();
@@ -24,9 +24,9 @@ public class DepartmentRepositoy {
 		departments.add(department);
 	}
 	
-	public static DepartmentRepositoy getInstance(){
+	public static DepartmentRepository getInstance(){
 		if(departmentRepository == null){
-			departmentRepository = new DepartmentRepositoy();
+			departmentRepository = new DepartmentRepository();
 		}
 		return departmentRepository;
 	}

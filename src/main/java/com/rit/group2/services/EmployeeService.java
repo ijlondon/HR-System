@@ -28,7 +28,7 @@ public class EmployeeService {
 		if(employee == null){
 			return new ErrorResponse("Unable to find employee");
 		}
-		return new SuccessfulResponse("Successfully found emplyee", employee);
+		return new SuccessfulResponse("Successfully found employee", employee);
 	}
 
 	public Response editEmployee(int employeeId, Employee employeeEdits) {
