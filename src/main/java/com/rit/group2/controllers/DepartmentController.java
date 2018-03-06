@@ -23,6 +23,11 @@ public class DepartmentController {
 	@Autowired
 	private DepartmentService departmentService;
 	
+	@RequestMapping(method = RequestMethod.GET, value = "")
+	public Response listDepartments() {
+		return departmentService.listDepartments();
+	}
+
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
     public Response createDepartment(@RequestBody BasicDepartment department) {
        return departmentService.createDepartment(department);

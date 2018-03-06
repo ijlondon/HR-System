@@ -23,6 +23,11 @@ public class EmployeeController {
 	@Autowired
 	public EmployeeService employeeService;
 
+	@RequestMapping(method = RequestMethod.GET, value = "")    
+    public Response listEmployees() {
+        return employeeService.listEmployees();
+    }
+
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
     public Response createEmployee(@RequestBody Employee employee) {
         return employeeService.createEmployee(employee);
