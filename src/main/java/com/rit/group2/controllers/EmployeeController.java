@@ -16,7 +16,7 @@ import com.rit.group2.services.EmployeeService;
 
 @RestController()
 @RequestMapping(value = "/employee")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = { "http://localhost:3000", "https://hr-system-client-professionals.herokuapp.com" })
 @EnableAutoConfiguration
 public class EmployeeController {
 	
