@@ -2,6 +2,7 @@ package com.rit.group2.services;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,14 @@ public class DepartmentService {
 	private EmployeeRepository employeeRepository = EmployeeRepository.getInstance();
 	private DepartmentRepository departmentRepository = DepartmentRepository.getInstance();
 	
+	public Response listDepartments() {
+		ArrayList<BasicDepartment> departmentList = new ArrayList<>();
+		for (Department department: departmentRepository.getAll()) {
+			departmentList.add(new BasicDepartment(department));
+		}
+		return new SuccessfulResponse("Successfully retrieved department list", departmentList);
+	}
+
 	public Response createDepartment(BasicDepartment newDepartment) {
 		Set<Employee> workers = new HashSet<>();
 		for(BasicEmployee employee: newDepartment.getWorkers()){

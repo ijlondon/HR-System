@@ -18,6 +18,10 @@ public class EmployeeService {
 	
 	public EmployeeService(){}
 
+	public Response listEmployees() {
+		return new SuccessfulResponse("Successfully retrieved department list", employeeRepository.getAll());
+	}
+
 	public Response createEmployee(Employee employee) {
 		employeeRepository.add(employee);
 		return new SuccessfulResponse("Successfully Created Employee", employee);
