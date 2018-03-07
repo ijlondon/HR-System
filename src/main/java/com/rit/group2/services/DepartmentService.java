@@ -1,5 +1,6 @@
 package com.rit.group2.services;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -50,6 +51,14 @@ public class DepartmentService {
 	public Response deleteDepartment(int departmentId) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	public Response getAll() {
+		ArrayList<BasicDepartment> departments = new ArrayList<>();
+		for(Department department: departmentRepositoy.getAll()){
+			departments.add(new BasicDepartment(department));
+		}
+		return new SuccessfulResponse("Retrieved all departments", departments);
 	}
 
 }
