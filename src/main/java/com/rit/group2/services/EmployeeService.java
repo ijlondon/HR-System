@@ -91,6 +91,14 @@ public class EmployeeService {
 		return new SuccessfulResponse("Found " + employeesFound.size() + " matches", employeesFound);
 	}
 
+	public Response getAll() {
+		ArrayList<BasicEmployee> employees = new ArrayList<>();
+		for(Employee employee: employeeRepository.getAll()){
+			employees.add(new BasicEmployee(employee));
+		}
+		return new SuccessfulResponse("Retrieved all employees", employees);
+	}
+
 	
 	
 }

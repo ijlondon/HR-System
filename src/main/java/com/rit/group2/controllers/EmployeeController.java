@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.rit.group2.models.Employee;
 import com.rit.group2.responses.Response;
 import com.rit.group2.services.EmployeeService;
 
@@ -22,6 +21,11 @@ public class EmployeeController {
 	
 	@Autowired
 	public EmployeeService employeeService;
+	
+	@RequestMapping(method = RequestMethod.GET, value = "")
+    public Response getAllEmployees() {
+		return employeeService.getAll();
+    }
 
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
     public Response createEmployee(@RequestBody Employee employee) {
