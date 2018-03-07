@@ -1,5 +1,8 @@
 package com.rit.group2.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 
 @Entity
@@ -17,11 +20,16 @@ public class Employee {
 	
 	private String email;
 	
+	private String jobTitle;
+	
 	private int salary;
 	
 	private boolean active;
 	
+	private Set<Employee> workers;
+	
 	public Employee(){
+		workers = new HashSet<Employee>();
 		this.active = true;
 	}
 	
@@ -33,6 +41,7 @@ public class Employee {
 		this.email = email;
 		this.salary = salary;
 		this.active = true;
+		workers = new HashSet<Employee>();
 	}
 	
 	public int getId(){
@@ -95,5 +104,24 @@ public class Employee {
 		this.active = false;
 	}
 	
+	public Set<BasicEmployee> getWorkers(){
+		Set<BasicEmployee> basicWorkers = new HashSet<BasicEmployee>();
+		for(Employee worker: workers){
+			basicWorkers.add(new BasicEmployee(worker));
+		}
+		return basicWorkers;
+	}
+	
+	public void updateWorkers(Set<Employee> workers){
+		this.workers = workers;
+	}
+
+	public String getJobTitle() {
+		return jobTitle;
+	}
+
+	public void setJobTitle(String jobTitle) {
+		this.jobTitle = jobTitle;
+	}
 	
 }

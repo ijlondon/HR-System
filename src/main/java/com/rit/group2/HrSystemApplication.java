@@ -9,4 +9,5 @@ public class HrSystemApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(HrSystemApplication.class, args);
 	}
+
 }

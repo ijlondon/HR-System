@@ -16,17 +16,12 @@ import com.rit.group2.services.EmployeeService;
 
 @RestController()
 @RequestMapping(value = "/employee")
-@CrossOrigin(origins = { "http://localhost:3000", "https://hr-system-client-professionals.herokuapp.com" })
+@CrossOrigin(origins = "http://localhost:3000", "https://hr-system-client-professionals.herokuapp.com" )
 @EnableAutoConfiguration
 public class EmployeeController {
 	
 	@Autowired
 	public EmployeeService employeeService;
-
-	@RequestMapping(method = RequestMethod.GET, value = "")    
-    public Response listEmployees() {
-        return employeeService.listEmployees();
-    }
 
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
     public Response createEmployee(@RequestBody Employee employee) {

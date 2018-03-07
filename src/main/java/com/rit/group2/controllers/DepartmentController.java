@@ -16,18 +16,13 @@ import com.rit.group2.services.DepartmentService;
 
 @RestController()
 @RequestMapping(value = "/department")
-@CrossOrigin(origins = { "http://localhost:3000", "https://hr-system-client-professionals.herokuapp.com" })
+@CrossOrigin(origins = "http://localhost:3000", "https://hr-system-client-professionals.herokuapp.com" )
 @EnableAutoConfiguration
 public class DepartmentController {
 
 	@Autowired
 	private DepartmentService departmentService;
 	
-	@RequestMapping(method = RequestMethod.GET, value = "")
-	public Response listDepartments() {
-		return departmentService.listDepartments();
-	}
-
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
     public Response createDepartment(@RequestBody BasicDepartment department) {
        return departmentService.createDepartment(department);

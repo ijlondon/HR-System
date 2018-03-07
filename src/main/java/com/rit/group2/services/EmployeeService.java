@@ -18,10 +18,6 @@ public class EmployeeService {
 	
 	public EmployeeService(){}
 
-	public Response listEmployees() {
-		return new SuccessfulResponse("Successfully retrieved department list", employeeRepository.getAll());
-	}
-
 	public Response createEmployee(Employee employee) {
 		employeeRepository.add(employee);
 		return new SuccessfulResponse("Successfully Created Employee", employee);
@@ -32,7 +28,7 @@ public class EmployeeService {
 		if(employee == null){
 			return new ErrorResponse("Unable to find employee");
 		}
-		return new SuccessfulResponse("Successfully found employee", employee);
+		return new SuccessfulResponse("Successfully found emplyee", employee);
 	}
 
 	public Response editEmployee(int employeeId, Employee employeeEdits) {
