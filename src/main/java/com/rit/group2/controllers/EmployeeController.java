@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
+import com.rit.group2.models.Employee;
 import com.rit.group2.responses.Response;
 import com.rit.group2.services.EmployeeService;
 
