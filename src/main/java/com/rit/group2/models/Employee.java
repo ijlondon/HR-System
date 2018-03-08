@@ -48,6 +48,11 @@ public class Employee {
 		return id;
 	}
 
+	// TODO: Remove for R2
+	public void setId(int id){
+		this.id = id;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
