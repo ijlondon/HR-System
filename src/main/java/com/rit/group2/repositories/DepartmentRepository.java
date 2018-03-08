@@ -20,7 +20,9 @@ public class DepartmentRepository {
 		workers.add(employees.get(1));
 		workers.add(employees.get(2));
 		workers.add(employees.get(3));
-		Department department = new Department("Sofware Test1", employees.get(0), workers);
+		Employee head = employees.get(0);
+		head.updateWorkers(workers);
+		Department department = new Department("Sofware Test1", head, workers);
 		departments.add(department);
 	}
 	
