@@ -10,9 +10,9 @@ import com.rit.group2.models.Employee;
 public class DepartmentRepository {
 
 	private ArrayList<Department> departments;
-	
+
 	private static DepartmentRepository departmentRepository;
-	
+
 	public DepartmentRepository() {
 		departments = new ArrayList<>();
 		ArrayList<Employee> employees = EmployeeRepository.getInstance().getAll();
@@ -23,16 +23,20 @@ public class DepartmentRepository {
 		Employee head = employees.get(0);
 		head.updateWorkers(workers);
 		Department department = new Department("Sofware Test1", head, workers);
+		departments.add(new Department("Software Testing 0", employees.get(3), workers));
+		departments.add(new Department("Software Testing 1", employees.get(1), workers));
+		departments.add(new Department("Software Testing 2", employees.get(2), workers));
+
 		departments.add(department);
 	}
-	
+
 	public static DepartmentRepository getInstance(){
 		if(departmentRepository == null){
 			departmentRepository = new DepartmentRepository();
 		}
 		return departmentRepository;
 	}
-	
+
 	public void add(Department department) {
 		departments.add(department);
 	}
@@ -47,5 +51,5 @@ public class DepartmentRepository {
 	public ArrayList<Department> getAll() {
 		return departments;
 	}
-	
+
 }

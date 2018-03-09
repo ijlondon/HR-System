@@ -1,9 +1,6 @@
 package com.rit.group2.repositories;
 
-
 import java.util.ArrayList;
-
-import com.rit.group2.models.Address;
 
 public class JobTitleRepository {
 
