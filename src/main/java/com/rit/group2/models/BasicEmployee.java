@@ -39,7 +39,4 @@ public class BasicEmployee {
 	public String getLastName() {
 		return lastName;
 	}
-	
-	
-	
 }

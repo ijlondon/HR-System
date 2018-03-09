@@ -1,11 +1,16 @@
 package com.rit.group2.services;
 
 import java.util.ArrayList;
+import java.util.Set;
 
+import org.junit.internal.builders.AllDefaultPossibilitiesBuilder;
 import org.springframework.stereotype.Service;
 
+import com.rit.group2.models.BasicDepartment;
 import com.rit.group2.models.BasicEmployee;
+import com.rit.group2.models.Department;
 import com.rit.group2.models.Employee;
+import com.rit.group2.repositories.DepartmentRepository;
 import com.rit.group2.repositories.EmployeeRepository;
 import com.rit.group2.responses.ErrorResponse;
 import com.rit.group2.responses.Response;
@@ -13,9 +18,10 @@ import com.rit.group2.responses.SuccessfulResponse;
 
 @Service("employeeService")
 public class EmployeeService {
-	
+
 	private EmployeeRepository employeeRepository = EmployeeRepository.getInstance();
-	
+	private DepartmentRepository departmentRepository = DepartmentRepository.getInstance();
+
 	public EmployeeService(){}
 
 	public Response createEmployee(Employee employee) {
@@ -68,13 +74,38 @@ public class EmployeeService {
 		if(employee == null){
 			return new ErrorResponse("Unable to find employee");
 		}
+		for(Department oldDepartment: departmentRepository.getAll()){
+			Set<Employee> workers = oldDepartment.getWorkers();
+			for(Employee employ: workers){
+				if(employ.getId() == employeeId){
+					workers.remove(employ);
+					break;
+				}
+			}
+		}
 		employee.terminate();
 		return new SuccessfulResponse("Successfully terminated Employee", employee);
 	}
 
 	public Response changeDepartments(int employeeId, int newDepartmentId) {
-		// TODO Auto-generated method stub
-		return null;
+		Department department = departmentRepository.get(newDepartmentId);
+		Employee employee = employeeRepository.get(employeeId);
+		if(department != null && employee != null){
+
+			for(Department oldDepartment: departmentRepository.getAll()){
+				Set<Employee> workers = oldDepartment.getWorkers();
+				for(Employee employ: workers){
+					if(employ.getId() == employeeId){
+						workers.remove(employ);
+						break;
+					}
+				}
+			}
+			department.getWorkers().add(employee);
+			return new SuccessfulResponse("Successfully transfered employee", new BasicDepartment(department));
+		}else{
+			return new ErrorResponse("Can't find department and/or employee");
+		}
 	}
 
 	public Response search(String searchQuery) {
@@ -83,8 +114,8 @@ public class EmployeeService {
 		}
 		ArrayList<BasicEmployee> employeesFound = new ArrayList<>();
 		for(Employee employee: employeeRepository.getAll()){
-			if(searchQuery.contains(employee.getFirstName()) || searchQuery.contains(employee.getLastName()) 
-					|| searchQuery.contains(employee.getTelephone()) || searchQuery.contains(employee.getEmail())){
+			if(employee.getFirstName().contains(searchQuery) || employee.getLastName().contains(searchQuery) 
+					|| employee.getTelephone().contains(searchQuery) || employee.getEmail().contains(searchQuery)){
 				employeesFound.add(new BasicEmployee(employee));
 			}
 		}
@@ -94,11 +125,13 @@ public class EmployeeService {
 	public Response getAll() {
 		ArrayList<BasicEmployee> employees = new ArrayList<>();
 		for(Employee employee: employeeRepository.getAll()){
-			employees.add(new BasicEmployee(employee));
+			if(employee.getActive()){
+				employees.add(new BasicEmployee(employee));
+			}
 		}
 		return new SuccessfulResponse("Retrieved all employees", employees);
 	}
 
-	
-	
+
+
 }

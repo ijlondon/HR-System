@@ -16,11 +16,12 @@ public class DepartmentRepository {
 	public DepartmentRepository() {
 		departments = new ArrayList<>();
 		ArrayList<Employee> employees = EmployeeRepository.getInstance().getAll();
-		Set<Employee> workers = new HashSet<>();
-		workers.add(employees.get(1));
-		workers.add(employees.get(2));
-		workers.add(employees.get(3));
-		Department department = new Department("Sofware Test1", employees.get(0), workers);
+		Employee head = employees.get(0);
+		Department department = new Department("Sofware Test1", head, new HashSet<Employee>(EmployeeRepository.getInstance().getAll()));
+		department.setId(0);
+		departments.add(department);
+		department = new Department("Economics", null, new HashSet<>());
+		department.setId(1);
 		departments.add(department);
 	}
 	

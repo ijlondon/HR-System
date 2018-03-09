@@ -21,6 +21,14 @@ public class Department {
 		this.workers = workers;
 	}
 	
+	public void setId(int id){
+		this.id = id;
+	}
+	
+	public int getId(){
+		return id;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -31,5 +39,9 @@ public class Department {
 
 	public Set<Employee> getWorkers() {
 		return workers;
+	}
+	
+	public void updateWorkers(Set<Employee> workers) {
+		this.workers = workers;
 	}
 }
