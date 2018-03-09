@@ -29,15 +29,15 @@ public class EmployeeRepository {
 		// constructors.forEach(constru => finalString += (`employees.add(${constru});\n`));
 		// First Level
 		Employee firstLevelBoss = new Employee("Sam", "Murry", new Address("300 Lomb Rd", "Rochester", "NY", 14580), "(585)658-9050", "test@rit.edu", 1, "Software Engineering Dean");
-		
+
 		// Second Level
 		Set<Employee> secondLevel = new HashSet<Employee>();
 		Employee secondLevelBoss = new Employee("Nathan", "Connor", new Address("300 Lomb Rd", "Rochester", "NY", 14580), "(585)156-5490", "nxc5929@rit.edu", 1, "Department Head");
 		secondLevel.add(secondLevelBoss);
 		secondLevel.add(new Employee("Matt", "Anacelle", new Address("301 Lomb Rd", "Rochester", "NY", 14580), "(585)586-5975", "max5890@rit.edu", 1, "Secretary"));
 		secondLevel.add(new Employee("Kaylie", "Glynn", new Address("300 Lomb Rd", "Rochester", "NY", 14580), "(585)963-1005", "kcg2690@rit.edu", 1, "Secretary"));
-		
-		
+
+
 		// Third Level
 		Set<Employee> thirdLevel = new HashSet<Employee>();
 		Employee thirdLevelBoss = new Employee("petar", "grievink", new Address("6047 paardenveld", "Rochester", "NY", 14580), "(898)-021-9082", "petar.grievink@example.com", 74342, "Advising Head");
@@ -51,7 +51,7 @@ public class EmployeeRepository {
 		thirdLevel.add(new Employee("emilie", "ennis", new Address("5737 dieppe ave", "Rochester", "NY", 14580), "358-949-0106", "emilie.ennis@example.com", 69047, "Teaching assistant"));
 		thirdLevel.add(new Employee("hannah", "stephan", new Address("2349 beethovenstraße", "Rochester", "NY", 14580), "0340-1210480", "hannah.stephan@example.com", 85770, "Teching AID"));
 		thirdLevel.add(new Employee("jessica", "nichols", new Address("2503 south street", "Rochester", "NY", 14580), "017684 53563", "jessica.nichols@example.com", 49048, "Instructor"));
-		
+
 		// Fourth Level
 		Set<Employee> fourthLevel = new HashSet<>();
 		fourthLevel.add(new Employee("angie", "larson", new Address("4874 main road", "Rochester", "NY", 14580), "017683 05885", "angie.larson@example.com", 55302, "Advisor"));
@@ -63,8 +63,8 @@ public class EmployeeRepository {
 		fourthLevel.add(new Employee("caroline", "larsen", new Address("5248 langgade", "Rochester", "NY", 14580), "62048487", "caroline.larsen@example.com", 77764, "Immersion Cordinator"));
 		fourthLevel.add(new Employee("mila", "bernard", new Address("4320 place du 22 novembre 1943", "Rochester", "NY", 14580), "(301)-678-9967", "mila.bernard@example.com", 5043, "Counsoler"));
 		fourthLevel.add(new Employee("علیرضا", "احمدی", new Address("4471 دکتر مفتح", "Rochester", "NY", 14580), "069-05673801", "علیرضا.احمدی@example.com", 69797, "Random1"));
-		fourthLevel.add(new Employee("titouan", "girard", new Address("2306 rue abel-hovelacque", "Rochester", "NY", 14580), "(479)-105-6623", "titouan.girard@example.com", 62088, "Random2"));		
-		
+		fourthLevel.add(new Employee("titouan", "girard", new Address("2306 rue abel-hovelacque", "Rochester", "NY", 14580), "(479)-105-6623", "titouan.girard@example.com", 62088, "Random2"));
+
 		firstLevelBoss.updateWorkers(secondLevel);
 		secondLevelBoss.updateWorkers(thirdLevel);
 		thirdLevelBoss.updateWorkers(fourthLevel);
@@ -78,7 +78,7 @@ public class EmployeeRepository {
 		int id = 0;
 		for (Employee employee : employees) {
 			employee.setId(id);
-			employee.setJobTitle("Education Teachers");
+			employee.setJobTitle("Computer Programmers");
 			id++;
 		}
 	}
