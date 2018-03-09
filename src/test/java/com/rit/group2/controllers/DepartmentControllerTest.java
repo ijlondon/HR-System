@@ -12,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import com.rit.group2.responses.SuccessfulResponse;
 
-import com.rit.group2.controllers.EmployeeController;
-import com.rit.group2.services.EmployeeService;
+import com.rit.group2.controllers.DepartmentController;
+import com.rit.group2.services.DepartmentService;
 import com.rit.group2.HrSystemApplication;
-import com.rit.group2.models.BasicEmployee;
+import com.rit.group2.models.BasicDepartment;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -27,19 +27,19 @@ import static org.mockito.Mockito.when;
 
 @ContextConfiguration(classes=HrSystemApplication.class)
 @RunWith(SpringRunner.class)
-@WebMvcTest(EmployeeController.class)
-public class EmployeeControllerTest {
+@WebMvcTest(DepartmentController.class)
+public class DepartmentControllerTest {
   @Autowired
   private MockMvc mvc;
 
   @MockBean
-  private EmployeeService service;
+  private DepartmentService service;
 
   @Test
-  public void getAllEmployeesShouldReturnMessageFromService() throws Exception {
+  public void getAllDepartmentsShouldReturnMessageFromService() throws Exception {
     // Arrange
-    String expectedMessage = "Retrieved all employees";
-    String endpoint = "/employee";
+    String expectedMessage = "Retrieved all departments";
+    String endpoint = "/department";
     when(service.getAll()).thenReturn(new SuccessfulResponse(expectedMessage, null));
     // Act
     this.mvc.perform(get(endpoint)).andDo(print())
@@ -49,25 +49,12 @@ public class EmployeeControllerTest {
   }
 
   @Test
-  public void getEmployeeShouldReturnMessageFromService() throws Exception {
+  public void getDepartmentShouldReturnMessageFromService() throws Exception {
     // Arrange
     int id = 0;
-    String endpoint = "/employee/" + id;
-    when(service.getEmployee(id)).thenReturn(new SuccessfulResponse("hit get employee endpoint", null));
-    // Act
-    this.mvc.perform(get(endpoint)).andDo(print())
-    // Assert
-      .andExpect(status().isOk())
-      .andExpect(content().string(containsString("hit get employee endpoint")));
-  }
-
-  @Test
-  public void searchsShouldReturnMessageFromService() throws Exception {
-    // Arrange
-    String query = "asdf";
-    String endpoint = "/employee/search?toSearch=" + query;
-    String expectedMessage = "hit searchs endpoint with argument " + query;
-    when(service.search(query)).thenReturn(new SuccessfulResponse(expectedMessage, null));
+    String expectedMessage = "hit get department endpoint";    
+    String endpoint = "/department/" + id;
+    when(service.getDepartment(id)).thenReturn(new SuccessfulResponse(expectedMessage, null));
     // Act
     this.mvc.perform(get(endpoint)).andDo(print())
     // Assert
