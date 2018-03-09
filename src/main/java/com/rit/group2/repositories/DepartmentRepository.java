@@ -17,17 +17,25 @@ public class DepartmentRepository {
 		departments = new ArrayList<>();
 		ArrayList<Employee> employees = EmployeeRepository.getInstance().getAll();
 		Set<Employee> workers = new HashSet<>();
-		workers.add(employees.get(1));
-		workers.add(employees.get(2));
-		workers.add(employees.get(3));
-		Employee head = employees.get(0);
-		head.updateWorkers(workers);
-		Department department = new Department("Sofware Test1", head, workers);
-		departments.add(new Department("Software Testing 0", employees.get(3), workers));
-		departments.add(new Department("Software Testing 1", employees.get(1), workers));
-		departments.add(new Department("Software Testing 2", employees.get(2), workers));
+		Set<Employee> workers1 = new HashSet<>();
+		Set<Employee> workers2 = new HashSet<>();
+		Set<Employee> workers3 = new HashSet<>();
 
-		departments.add(department);
+		for (int i=4; i<24; i++) {
+				if( i <= 8)
+					{workers.add(employees.get(i));}
+				else if ( i <= 13 )
+					{workers1.add(employees.get(i));}
+				else if ( i <= 18)
+					{workers2.add(employees.get(i));}
+				else if ( i < 24)
+					{workers3.add(employees.get(i));}
+		}
+
+		departments.add(new Department("Software Testing 0", employees.get(0), workers));
+		departments.add(new Department("Software Testing 1", employees.get(1), workers1));
+		departments.add(new Department("Software Testing 2", employees.get(2), workers2));
+		departments.add(new Department("Software Testing 3", employees.get(3), workers3));
 	}
 
 	public static DepartmentRepository getInstance(){

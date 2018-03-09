@@ -78,7 +78,7 @@ public class EmployeeRepository {
 		int id = 0;
 		for (Employee employee : employees) {
 			employee.setId(id);
-			employee.setJobTitle("Education Teachers")
+			employee.setJobTitle("Education Teachers");
 			id++;
 		}
 	}
