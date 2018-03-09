@@ -74,6 +74,15 @@ public class EmployeeService {
 		if(employee == null){
 			return new ErrorResponse("Unable to find employee");
 		}
+		for(Department oldDepartment: departmentRepository.getAll()){
+			Set<Employee> workers = oldDepartment.getWorkers();
+			for(Employee employ: workers){
+				if(employ.getId() == employeeId){
+					workers.remove(employ);
+					break;
+				}
+			}
+		}
 		employee.terminate();
 		return new SuccessfulResponse("Successfully terminated Employee", employee);
 	}
