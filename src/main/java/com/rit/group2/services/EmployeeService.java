@@ -105,8 +105,8 @@ public class EmployeeService {
 		}
 		ArrayList<BasicEmployee> employeesFound = new ArrayList<>();
 		for(Employee employee: employeeRepository.getAll()){
-			if(searchQuery.contains(employee.getFirstName()) || searchQuery.contains(employee.getLastName()) 
-					|| searchQuery.contains(employee.getTelephone()) || searchQuery.contains(employee.getEmail())){
+			if(employee.getFirstName().contains(searchQuery) || employee.getLastName().contains(searchQuery) 
+					|| employee.getTelephone().contains(searchQuery) || employee.getEmail().contains(searchQuery)){
 				employeesFound.add(new BasicEmployee(employee));
 			}
 		}
