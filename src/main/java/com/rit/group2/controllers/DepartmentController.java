@@ -22,22 +22,22 @@ public class DepartmentController {
 
 	@Autowired
 	private DepartmentService departmentService;
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "")
 	public Response getAllDepartments(){
 		return departmentService.getAll();
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
     public Response createDepartment(@RequestBody BasicDepartment department) {
        return departmentService.createDepartment(department);
     }
-	
+
 	@RequestMapping(method = RequestMethod.GET, value = "/{departmentId}")
     public Response getDepartment(@PathVariable("departmentId") int departmentId) {
         return departmentService.getDepartment(departmentId);
     }
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/{departmentId}/edit")
     public Response editDepartment(
     		@PathVariable("departmentId") int departmentId,
@@ -45,10 +45,10 @@ public class DepartmentController {
     		) {
 		return departmentService.editDepartment(departmentId, departmentEdits);
     }
-	
+
 	@RequestMapping(method = RequestMethod.POST, value = "/{departmentId}/delete")
-    public Response editDepartment(@PathVariable("departmentId") int departmentId) {
+    public Response deleteDepartment(@PathVariable("departmentId") int departmentId) {
 		return departmentService.deleteDepartment(departmentId);
     }
-		
+
 }

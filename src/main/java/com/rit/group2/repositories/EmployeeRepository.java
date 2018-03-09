@@ -9,17 +9,18 @@ import com.rit.group2.models.Address;
 import com.rit.group2.models.Employee;
 
 public class EmployeeRepository {
-	
+
 	private ArrayList<Employee> employees;
-	
+
 	private static EmployeeRepository employeeRepository;
 
 	public EmployeeRepository(){
 		createTestEmployees();
 	}
-	
+
 	private void createTestEmployees() {
 		employees = new ArrayList<Employee>();
+
 		// Users generated with:
 		// fetch('https://randomuser.me/api/?results=20').then(response=>{return response.json();}).then(res=>console.log(res['results']));
 		// var constructors = [];
@@ -67,16 +68,17 @@ public class EmployeeRepository {
 		firstLevelBoss.updateWorkers(secondLevel);
 		secondLevelBoss.updateWorkers(thirdLevel);
 		thirdLevelBoss.updateWorkers(fourthLevel);
-		
+
 		employees.add(firstLevelBoss);
 		employees.addAll(secondLevel);
 		employees.addAll(thirdLevel);
 		employees.addAll(fourthLevel);
-		
+
 		// TODO: Remove for R2
 		int id = 0;
 		for (Employee employee : employees) {
 			employee.setId(id);
+			employee.setJobTitle("Education Teachers");
 			id++;
 		}
 	}
