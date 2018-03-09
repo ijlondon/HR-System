@@ -20,9 +20,6 @@ public class DepartmentRepository {
 		Department department = new Department("Sofware Test1", head, new HashSet<Employee>(EmployeeRepository.getInstance().getAll()));
 		department.setId(0);
 		departments.add(department);
-		department = new Department("Economics", null, new HashSet<>());
-		department.setId(1);
-		departments.add(department);
 	}
 	
 	public static DepartmentRepository getInstance(){

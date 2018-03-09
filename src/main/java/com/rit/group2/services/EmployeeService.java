@@ -3,7 +3,6 @@ package com.rit.group2.services;
 import java.util.ArrayList;
 import java.util.Set;
 
-import org.junit.internal.builders.AllDefaultPossibilitiesBuilder;
 import org.springframework.stereotype.Service;
 
 import com.rit.group2.models.BasicDepartment;
