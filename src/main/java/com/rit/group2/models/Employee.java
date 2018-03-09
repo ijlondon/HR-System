@@ -33,7 +33,7 @@ public class Employee {
 		this.active = true;
 	}
 	
-	public Employee(String firstName, String lastName, Address address, String telephone, String email, int salary){
+	public Employee(String firstName, String lastName, Address address, String telephone, String email, int salary, String jobTitle){
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
@@ -41,6 +41,7 @@ public class Employee {
 		this.email = email;
 		this.salary = salary;
 		this.active = true;
+		this.jobTitle = jobTitle;
 		workers = new HashSet<Employee>();
 	}
 	
