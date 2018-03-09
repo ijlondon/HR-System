@@ -24,7 +24,7 @@ public class DepartmentController {
 	private DepartmentService departmentService;
 
 	@RequestMapping(method = RequestMethod.GET, value = "")
-	private Response getAllDepartments(){
+	public Response getAllDepartments(){
 		return departmentService.getAll();
 	}
 
