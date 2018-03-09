@@ -1,6 +1,7 @@
-package com.rit.group2.controllers;
+package com.rit.group2.general;
 
 import com.rit.group2.HrSystemApplication;
+import com.rit.group2.controllers.DepartmentController;
 import com.rit.group2.responses.SuccessfulResponse;
 import com.rit.group2.services.DepartmentService;
 import org.junit.Test;
