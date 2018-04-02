@@ -110,12 +110,8 @@ public class Employee {
 		this.active = false;
 	}
 	
-	public Set<BasicEmployee> getWorkers(){
-		Set<BasicEmployee> basicWorkers = new HashSet<BasicEmployee>();
-		for(Employee worker: workers){
-			basicWorkers.add(new BasicEmployee(worker));
-		}
-		return basicWorkers;
+	public Set<Employee> getWorkers(){
+		return workers;
 	}
 	
 	public void updateWorkers(Set<Employee> workers){

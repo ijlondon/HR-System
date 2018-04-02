@@ -22,11 +22,15 @@ public class BasicDepartment {
 	public BasicDepartment(Department department){
 		this.name = department.getName();
 		this.head = new BasicEmployee(department.getHead());
-		Set<BasicEmployee> workers = new HashSet<>();
-		for(Employee employee: department.getWorkers()){
-			workers.add(new BasicEmployee(employee));
+		workers = new HashSet<>();
+		getAllWorkers(department.getHead());
+	}
+	
+	private void getAllWorkers(Employee employee){
+		workers.add(new BasicEmployee(employee));
+		for(Employee worker: employee.getWorkers()){
+			getAllWorkers(worker);
 		}
-		this.workers = workers;
 	}
 
 	public String getName() {

@@ -12,13 +12,10 @@ public class Department {
 	private String name;
 	
 	private Employee head;
-
-	private Set<Employee> workers;
 	
-	public Department(String name, Employee head, Set<Employee> workers){
+	public Department(String name, Employee head){
 		this.name = name;
 		this.head = head;
-		this.workers = workers;
 	}
 	
 	public void setId(int id){
@@ -35,13 +32,5 @@ public class Department {
 
 	public Employee getHead() {
 		return head;
-	}
-
-	public Set<Employee> getWorkers() {
-		return workers;
-	}
-	
-	public void updateWorkers(Set<Employee> workers) {
-		this.workers = workers;
 	}
 }
