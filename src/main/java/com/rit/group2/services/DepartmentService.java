@@ -30,7 +30,7 @@ public class DepartmentService {
 		}
 		Employee head = employeeRepositoy.get(newDepartment.getHead().getId());
 		head.updateWorkers(workers);
-		Department department = new Department(newDepartment.getName(), head, workers);
+		Department department = new Department(newDepartment.getName(), head);
 		departmentRepository.add(department);
 		return new SuccessfulResponse("Successfully created department", new BasicDepartment(department));
 	}

@@ -52,10 +52,8 @@ public class DepartmentControllerTest {
 	@Before
 	public void setup(){
 		worker = new Employee("Nathan", "Connor", new Address("300 Lomb Road", "Rochester", "NY", 14589), "(585)-589-5809", "nxc5929@rit.edu", 1, "tester");
-		Set<Employee> workers = new HashSet<>();
-		workers.add(worker);
 		head = new Employee("Kaylie", "Glynn", new Address("300 Lomb Road", "Rochester", "NY", 14589), "(585)-589-3455", "kcg3450@rit.edu", 1, "tester");
-		department = new Department("Testing", head, workers);
+		department = new Department("Testing", head);
 	}
 	
 	@Test

@@ -73,15 +73,6 @@ public class EmployeeService {
 		if(employee == null){
 			return new ErrorResponse("Unable to find employee");
 		}
-		for(Department oldDepartment: departmentRepository.getAll()){
-			Set<Employee> workers = oldDepartment.getWorkers();
-			for(Employee employ: workers){
-				if(employ.getId() == employeeId){
-					workers.remove(employ);
-					break;
-				}
-			}
-		}
 		employee.terminate();
 		return new SuccessfulResponse("Successfully terminated Employee", employee);
 	}
@@ -89,22 +80,8 @@ public class EmployeeService {
 	public Response changeDepartments(int employeeId, int newDepartmentId) {
 		Department department = departmentRepository.get(newDepartmentId);
 		Employee employee = employeeRepository.get(employeeId);
-		if(department != null && employee != null){
-
-			for(Department oldDepartment: departmentRepository.getAll()){
-				Set<Employee> workers = oldDepartment.getWorkers();
-				for(Employee employ: workers){
-					if(employ.getId() == employeeId){
-						workers.remove(employ);
-						break;
-					}
-				}
-			}
-			department.getWorkers().add(employee);
-			return new SuccessfulResponse("Successfully transfered employee", new BasicDepartment(department));
-		}else{
-			return new ErrorResponse("Can't find department and/or employee");
-		}
+//		TODO: Figure out how to do this
+		return new SuccessfulResponse("Not implimented yet", employee);
 	}
 
 	public Response search(String searchQuery) {
