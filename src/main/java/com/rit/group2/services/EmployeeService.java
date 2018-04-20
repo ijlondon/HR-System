@@ -113,17 +113,21 @@ public class EmployeeService {
 		}
 		ArrayList<BasicEmployee> employeesFound = new ArrayList<>();
 		for(Employee employee: employeeRepository.getAll()){
-			String[] searchedFields = {employee.getFirstName(), employee.getLastName(), employee.getTelephone(), employee.getEmail()};
+			String[] searchedFields = {
+				employee.getFirstName() + ' ' + employee.getLastName(), // Full Name
+				employee.getTelephone(),
+				employee.getEmail()
+			};
+			boolean matchingField = false;
 			for (String field : searchedFields) {
-				boolean matchingField = false;
 				if (field.toLowerCase().contains(searchQuery.toLowerCase())) {
 					matchingField = true;
 				}
-				if (matchingField) {
-					employeesFound.add(new BasicEmployee(employee));					
-				}
 			}
-		}
+			if (matchingField) {
+				employeesFound.add(new BasicEmployee(employee));					
+			}
+	}
 		return new SuccessfulResponse("Found " + employeesFound.size() + " matches", employeesFound);
 	}
 
