@@ -23,14 +23,14 @@ public class Employee {
 	
 	private String lastName;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade =  CascadeType.ALL)
 	private Address address;
 	
 	private String telephone;
 	
 	private String email;
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
+	@OneToOne(fetch = FetchType.EAGER, cascade =  CascadeType.PERSIST)
 	private Department department;
 	
 	private String jobTitle;
@@ -39,7 +39,7 @@ public class Employee {
 	
 	private boolean active;
 	
-	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Set<Employee> workers;
 	
 	public Employee(){
@@ -133,8 +133,12 @@ public class Employee {
 		this.active = false;
 	}
 	
-	public Set<Employee> getWorkers(){
-		return workers;
+	public Set<BasicEmployee> getWorkers(){
+		Set<BasicEmployee> basicWorkers = new HashSet<>();
+		for(Employee worker: workers){
+			basicWorkers.add(new BasicEmployee(worker));
+		}
+		return basicWorkers;
 	}
 	
 	public void setWorkers(Set<Employee> workers){
