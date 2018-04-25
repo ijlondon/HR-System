@@ -1,21 +1,23 @@
 package com.rit.group2.models;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Department")
 public class Department {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private String name;
 	
-	private Employee head;
-	
-	public Department(String name, Employee head){
+	public Department(String name){
 		this.name = name;
-		this.head = head;
 	}
 	
 	public void setId(int id){
@@ -28,9 +30,5 @@ public class Department {
 	
 	public String getName() {
 		return name;
-	}
-
-	public Employee getHead() {
-		return head;
 	}
 }

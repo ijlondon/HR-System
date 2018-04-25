@@ -3,22 +3,35 @@ package com.rit.group2.models;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Employee {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private String firstName;
 	
 	private String lastName;
 	
+	@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
 	private Address address;
 	
 	private String telephone;
 	
 	private String email;
+	
+	@OneToOne(fetch = FetchType.LAZY, cascade =  CascadeType.ALL)
+	private Department department;
 	
 	private String jobTitle;
 	
@@ -26,6 +39,7 @@ public class Employee {
 	
 	private boolean active;
 	
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Set<Employee> workers;
 	
 	public Employee(){
@@ -33,12 +47,13 @@ public class Employee {
 		this.active = true;
 	}
 	
-	public Employee(String firstName, String lastName, Address address, String telephone, String email, int salary, String jobTitle){
+	public Employee(String firstName, String lastName, Address address, String telephone, String email, Department department, int salary, String jobTitle){
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.telephone = telephone;
 		this.email = email;
+		this.department = department;
 		this.salary = salary;
 		this.active = true;
 		this.jobTitle = jobTitle;
@@ -94,6 +109,14 @@ public class Employee {
 		this.email = email;
 	}
 
+	public Department getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(Department department) {
+		this.department = department;
+	}
+
 	public int getSalary() {
 		return salary;
 	}
@@ -114,8 +137,16 @@ public class Employee {
 		return workers;
 	}
 	
-	public void updateWorkers(Set<Employee> workers){
+	public void setWorkers(Set<Employee> workers){
 		this.workers = workers;
+	}
+	
+	public void addWorker(Employee worker){
+		this.workers.add(worker);
+	}
+	
+	public void removeWorker(Employee worker){
+		this.workers.remove(worker);
 	}
 
 	public String getJobTitle() {

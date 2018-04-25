@@ -3,9 +3,9 @@ package com.rit.group2.services;
 import java.util.ArrayList;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rit.group2.models.BasicDepartment;
 import com.rit.group2.models.BasicEmployee;
 import com.rit.group2.models.Department;
 import com.rit.group2.models.Employee;
@@ -18,18 +18,21 @@ import com.rit.group2.responses.SuccessfulResponse;
 @Service("employeeService")
 public class EmployeeService {
 
-	private EmployeeRepository employeeRepository = EmployeeRepository.getInstance();
-	private DepartmentRepository departmentRepository = DepartmentRepository.getInstance();
+	@Autowired
+	EmployeeRepository employeeRepository;
+	
+	@Autowired
+	private DepartmentRepository departmentRepository;
 
 	public EmployeeService(){}
 
 	public Response createEmployee(Employee employee) {
-		employeeRepository.add(employee);
+		employeeRepository.save(employee);
 		return new SuccessfulResponse("Successfully Created Employee", employee);
 	}
 
 	public Response getEmployee(int employeeId) {
-		Employee employee = employeeRepository.get(employeeId);
+		Employee employee = employeeRepository.findById(employeeId);
 		if(employee == null){
 			return new ErrorResponse("Unable to find employee");
 		}
@@ -37,7 +40,7 @@ public class EmployeeService {
 	}
 
 	public Response editEmployee(int employeeId, Employee employeeEdits) {
-		Employee originalEmployee = employeeRepository.get(employeeId);
+		Employee originalEmployee = employeeRepository.findById(employeeId);
 		if(originalEmployee == null){
 			return new ErrorResponse("Unable to find employee");
 		}
@@ -69,7 +72,7 @@ public class EmployeeService {
 	}
 
 	public Response terminateEmployee(int employeeId) {
-		Employee employee = employeeRepository.get(employeeId);
+		Employee employee = employeeRepository.findById(employeeId);
 		if(employee == null){
 			return new ErrorResponse("Unable to find employee");
 		}
@@ -78,8 +81,8 @@ public class EmployeeService {
 	}
 
 	public Response changeDepartments(int employeeId, int newDepartmentId) {
-		Department department = departmentRepository.get(newDepartmentId);
-		Employee employee = employeeRepository.get(employeeId);
+//		Department department = departmentRepository.get(newDepartmentId);
+		Employee employee = employeeRepository.findById(employeeId);
 //		TODO: Figure out how to do this
 		return new SuccessfulResponse("Not implimented yet", employee);
 	}
@@ -89,7 +92,7 @@ public class EmployeeService {
 			return new ErrorResponse("Search Query was empty");
 		}
 		ArrayList<BasicEmployee> employeesFound = new ArrayList<>();
-		for(Employee employee: employeeRepository.getAll()){
+		for(Employee employee: employeeRepository.findAll()){
 			if(employee.getFirstName().contains(searchQuery) || employee.getLastName().contains(searchQuery) 
 					|| employee.getTelephone().contains(searchQuery) || employee.getEmail().contains(searchQuery)){
 				employeesFound.add(new BasicEmployee(employee));
@@ -100,7 +103,7 @@ public class EmployeeService {
 
 	public Response getAll() {
 		ArrayList<BasicEmployee> employees = new ArrayList<>();
-		for(Employee employee: employeeRepository.getAll()){
+		for(Employee employee: employeeRepository.findAll()){
 			if(employee.getActive()){
 				employees.add(new BasicEmployee(employee));
 			}
