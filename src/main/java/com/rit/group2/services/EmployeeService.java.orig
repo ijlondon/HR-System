@@ -22,7 +22,7 @@ public class EmployeeService {
 	EmployeeRepository employeeRepository;
 	
 	@Autowired
-	private DepartmentRepository departmentRepository;
+	DepartmentRepository departmentRepository;
 
 	public EmployeeService(){}
 
@@ -68,6 +68,7 @@ public class EmployeeService {
 		if(employeeEdits.getEmail() != null){
 			originalEmployee.setEmail(employeeEdits.getEmail());
 		}
+		employeeRepository.save(originalEmployee);
 		return new SuccessfulResponse("Succesfully edited Employee", originalEmployee);
 	}
 
@@ -77,14 +78,19 @@ public class EmployeeService {
 			return new ErrorResponse("Unable to find employee");
 		}
 		employee.terminate();
+		employeeRepository.save(employee);
 		return new SuccessfulResponse("Successfully terminated Employee", employee);
 	}
 
 	public Response changeDepartments(int employeeId, int newDepartmentId) {
-//		Department department = departmentRepository.get(newDepartmentId);
+		Department department = departmentRepository.findById(newDepartmentId);
 		Employee employee = employeeRepository.findById(employeeId);
-//		TODO: Figure out how to do this
-		return new SuccessfulResponse("Not implimented yet", employee);
+		if(department == null || employee == null){
+			return new ErrorResponse("Unable to find employee and/or department");
+		}
+		employee.setDepartment(department);
+		employeeRepository.save(employee);
+		return new SuccessfulResponse("Successfully changed department", employee);
 	}
 
 	public Response search(String searchQuery) {

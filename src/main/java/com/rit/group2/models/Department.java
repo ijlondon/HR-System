@@ -1,24 +1,23 @@
 package com.rit.group2.models;
 
-import java.util.Set;
-
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="Department")
 public class Department {
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	private String name;
 	
-	private Employee head;
-
-	private Set<Employee> workers;
-	
-	public Department(String name, Employee head, Set<Employee> workers){
+	public Department(String name){
 		this.name = name;
-		this.head = head;
-		this.workers = workers;
 	}
 	
 	public void setId(int id){
@@ -33,15 +32,9 @@ public class Department {
 		return name;
 	}
 
-	public Employee getHead() {
-		return head;
-	}
-
-	public Set<Employee> getWorkers() {
-		return workers;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
-	public void updateWorkers(Set<Employee> workers) {
-		this.workers = workers;
-	}
+	
 }

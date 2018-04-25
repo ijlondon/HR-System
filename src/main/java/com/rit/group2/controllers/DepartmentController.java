@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.CrossOrigin;
 
-import com.rit.group2.models.BasicDepartment;
 import com.rit.group2.models.Department;
 import com.rit.group2.responses.Response;
 import com.rit.group2.services.DepartmentService;
@@ -29,7 +28,7 @@ public class DepartmentController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
-    public Response createDepartment(@RequestBody BasicDepartment department) {
+    public Response createDepartment(@RequestBody Department department) {
        return departmentService.createDepartment(department);
     }
 

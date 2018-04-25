@@ -44,7 +44,7 @@ public class EmployeeControllerTest {
 	
 	@Before
 	public void setup(){
-		employee1 = new Employee("Nathan", "Connor", new Address("300 Lomb Road", "Rochester", "NY", 14589), "(585)-589-5809", "nxc5929@rit.edu", 1, "tester");
+		employee1 = new Employee("Nathan", "Connor", new Address("300 Lomb Road", "Rochester", "NY", 14589), "(585)-589-5809", "nxc5929@rit.edu", null, 1, "tester");
 	}
 	
 	@Test
