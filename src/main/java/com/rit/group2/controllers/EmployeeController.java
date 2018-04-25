@@ -23,6 +23,11 @@ public class EmployeeController {
 	@Autowired
 	public EmployeeService employeeService;
 	
+	@RequestMapping(method = RequestMethod.GET, value = "/init")
+    public Response initEmployees() {
+		return employeeService.init();
+    }
+	
 	@RequestMapping(method = RequestMethod.GET, value = "")
     public Response getAllEmployees() {
 		return employeeService.getAll();
