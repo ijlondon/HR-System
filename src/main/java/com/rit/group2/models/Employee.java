@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -30,7 +31,7 @@ public class Employee {
 	
 	private String email;
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade =  CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade =  CascadeType.PERSIST)
 	private Department department;
 	
 	private String jobTitle;
@@ -38,7 +39,12 @@ public class Employee {
 	private int salary;
 	
 	private boolean active;
+
+	private boolean admin;
 	
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private Employee boss;
+
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Set<Employee> workers;
 	
@@ -56,6 +62,7 @@ public class Employee {
 		this.department = department;
 		this.salary = salary;
 		this.active = true;
+		this.admin = false;
 		this.jobTitle = jobTitle;
 		workers = new HashSet<Employee>();
 	}
@@ -133,6 +140,22 @@ public class Employee {
 		this.active = false;
 	}
 	
+	public boolean getAdmin(){
+		return admin;
+	}
+
+	public void setAdmin(boolean admin){
+		this.admin = admin;
+	}
+
+	public BasicEmployee getBoss() {
+		return new BasicEmployee(boss);
+	}
+
+	public void setBoss(Employee boss){
+		this.boss = boss;
+	}
+
 	public Set<BasicEmployee> getWorkers(){
 		Set<BasicEmployee> basicWorkers = new HashSet<>();
 		for(Employee worker: workers){

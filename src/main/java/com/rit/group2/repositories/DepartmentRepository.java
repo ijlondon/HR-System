@@ -15,6 +15,6 @@ public interface DepartmentRepository extends CrudRepository<Department, Long> {
 	Department findById(@Param("id") int id);
 	
 	@Query("select e from Employee e where e.department.id = :id")
-	Set<Employee> findWorkersByDepatmentId(@Param("id") int id);
+	Set<Employee> findWorkersByDepartmentId(@Param("id") int id);
 
 }
