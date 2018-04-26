@@ -6,7 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rit.group2.models.BasicDepartent;
+import com.rit.group2.models.BasicDepartment;
 import com.rit.group2.models.Department;
 import com.rit.group2.models.Employee;
 import com.rit.group2.repositories.DepartmentRepository;
@@ -30,8 +30,8 @@ public class DepartmentService {
 		if(department == null){
 			return new ErrorResponse("Can't find department");
 		}
-		Set<Employee> workers = departmentRepository.findWorkersByDepatmentId(departmentId);
-		return new SuccessfulResponse("Successfully retreived department", new BasicDepartent(department, workers));
+		Set<Employee> workers = departmentRepository.findWorkersByDepartmentId(departmentId);
+		return new SuccessfulResponse("Successfully retreived department", new BasicDepartment(department, workers));
 	}
 
 	public Response editDepartment(int departmentId, Department departmentEdits) {
