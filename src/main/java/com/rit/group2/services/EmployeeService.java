@@ -100,6 +100,7 @@ public class EmployeeService {
 		if(employeeEdits.getEmail() != null){
 			originalEmployee.setEmail(employeeEdits.getEmail());
 		}
+		employeeRepository.save(originalEmployee);
 		return new SuccessfulResponse("Succesfully edited Employee", originalEmployee);
 	}
 
@@ -109,13 +110,21 @@ public class EmployeeService {
 			return new ErrorResponse("Unable to find employee");
 		}
 		employee.terminate();
+		employeeRepository.save(employee);
 		return new SuccessfulResponse("Successfully terminated Employee", employee);
 	}
 
 	public Response changeDepartments(int employeeId, int newDepartmentId) {
-//		Department department = departmentRepository.get(newDepartmentId);
+		Department department = departmentRepository.findById(newDepartmentId);
 		Employee employee = employeeRepository.findById(employeeId);
-//		TODO: Figure out how to do this
+		
+		if(employee == null || department == null){
+			return new ErrorResponse("Employee or Deparment doesn't exist");
+		}
+		
+		employee.setDepartment(department);
+		employeeRepository.save(employee);
+		
 		return new SuccessfulResponse("Not implimented yet", employee);
 	}
 
