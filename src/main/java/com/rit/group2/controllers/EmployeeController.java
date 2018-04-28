@@ -36,7 +36,6 @@ public class EmployeeController {
 
 	@RequestMapping(method = RequestMethod.GET, value = "/userInfo")
     public Response getUserInfo(@RequestHeader("Authorization") String token) {
-		System.out.println("********** " + token);
         return employeeService.userInfo(token);
     }
 	
