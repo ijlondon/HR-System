@@ -15,6 +15,7 @@ import com.rit.group2.repositories.EmployeeRepository;
 import com.rit.group2.responses.ErrorResponse;
 import com.rit.group2.responses.Response;
 import com.rit.group2.responses.SuccessfulResponse;
+import com.rit.group2.security.GoogleOauth2;
 
 @Service("employeeService")
 public class EmployeeService {
@@ -22,11 +23,15 @@ public class EmployeeService {
 	@Autowired
 	EmployeeRepository employeeRepository;
 	
-	@Autowired DepartmentRepository departmentRepository;
+	@Autowired 
+	DepartmentRepository departmentRepository;
 
+	@Autowired
+	GoogleOauth2 googleSecurityService;
+	
 	public EmployeeService(){}
 
-	
+
 	public Response init(){
 		Department department1 = new Department("Software Engineering");
 		Department department2 = new Department("Buisness");
@@ -37,14 +42,14 @@ public class EmployeeService {
 		Employee employee5 = new Employee("Kaylie", "Glynn", new Address("5 Road", "Rochester", "NY", 14580), "(585) 444-4444", "nfe3920@rit.edu", department2, 1, "Backend Developer");
 		Employee employee6 = new Employee("Dayna", "Glynn", new Address("6 Road", "Rochester", "NY", 14580), "(585) 555-5555", "fpo0921@rit.edu", department2, 1, "Backend Developer");
 		Employee employee7 = new Employee("Marrie", "Glynn", new Address("7 Road", "Rochester", "NY", 14580), "(585) 666-6666", "psk0937@rit.edu", department2, 1, "Backend Developer");
-		
+
 		employee1.addWorker(employee2);
 		employee1.addWorker(employee3);
 		employee1.addWorker(employee4);
-		
+
 		employee5.addWorker(employee6);
 		employee5.addWorker(employee7);
-		
+
 		departmentRepository.save(department1);
 		departmentRepository.save(department2);
 		employeeRepository.save(employee1);
@@ -54,10 +59,10 @@ public class EmployeeService {
 		employeeRepository.save(employee5);
 		employeeRepository.save(employee6);
 		employeeRepository.save(employee7);
-	
+
 		return new SuccessfulResponse("Successfully init database", null);
 	}
-	
+
 	public Response createEmployee(Employee employee) {
 		employeeRepository.save(employee);
 		return new SuccessfulResponse("Successfully Created Employee", employee);
@@ -117,14 +122,14 @@ public class EmployeeService {
 	public Response changeDepartments(int employeeId, int newDepartmentId) {
 		Department department = departmentRepository.findById(newDepartmentId);
 		Employee employee = employeeRepository.findById(employeeId);
-		
+
 		if(employee == null || department == null){
 			return new ErrorResponse("Employee or Deparment doesn't exist");
 		}
-		
+
 		employee.setDepartment(department);
 		employeeRepository.save(employee);
-		
+
 		return new SuccessfulResponse("Not implimented yet", employee);
 	}
 
@@ -135,9 +140,9 @@ public class EmployeeService {
 		ArrayList<BasicEmployee> employeesFound = new ArrayList<>();
 		for(Employee employee: employeeRepository.findAll()){
 			String[] searchedFields = {
-				employee.getFirstName() + ' ' + employee.getLastName(), // Full Name
-				employee.getTelephone(),
-				employee.getEmail()
+					employee.getFirstName() + ' ' + employee.getLastName(), // Full Name
+					employee.getTelephone(),
+					employee.getEmail()
 			};
 			boolean matchingField = false;
 			for (String field : searchedFields) {
@@ -148,8 +153,37 @@ public class EmployeeService {
 			if (matchingField) {
 				employeesFound.add(new BasicEmployee(employee));					
 			}
-	}
+		}
 		return new SuccessfulResponse("Found " + employeesFound.size() + " matches", employeesFound);
+	}
+
+	public Response canUserEdit(String userToken, int userToModifyId){
+		Employee loggedInEmployee = googleSecurityService.getEmployeeFromToken(userToken);
+		if(loggedInEmployee != null){
+			boolean canEdit = findIfBelow(loggedInEmployee, userToModifyId);
+			return new SuccessfulResponse("Successfully found user", canEdit);
+		}else{
+			return new SuccessfulResponse("Successfully found user", false);
+		}
+	}
+	
+	private boolean findIfBelow(Employee bossEmployee, int userToModifyId) {
+		for(Employee worker: bossEmployee.fetchRawWorkers()){
+			if(worker.getId() == userToModifyId){
+				return true;
+			}else{
+				if (findIfBelow(worker, userToModifyId)){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+
+	public Response userInfo(String userToken){
+		Employee loggedInEmployee = googleSecurityService.getEmployeeFromToken(userToken);
+		return new SuccessfulResponse("Successfully found user", loggedInEmployee);
 	}
 
 	public Response getAll() {

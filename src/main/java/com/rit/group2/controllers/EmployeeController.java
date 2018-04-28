@@ -16,7 +16,7 @@ import com.rit.group2.services.EmployeeService;
 
 @RestController()
 @RequestMapping(value = "/employee")
-@CrossOrigin(origins = {"${settings.cors_origin}"})
+//@CrossOrigin(origins = {"${settings.cors_origin}"})
 @EnableAutoConfiguration
 public class EmployeeController {
 	
@@ -33,6 +33,16 @@ public class EmployeeController {
 		return employeeService.getAll();
     }
 
+	@RequestMapping(method = RequestMethod.GET, value = "/userInfo")
+    public Response getUserInfo(@RequestParam String token) {
+        return employeeService.userInfo(token);
+    }
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/canEdit")
+    public Response canEditEmployee(@RequestParam String token, @RequestParam int toModifyId) {
+        return employeeService.canUserEdit(token, toModifyId);
+    }
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
     public Response createEmployee(@RequestBody Employee employee) {
         return employeeService.createEmployee(employee);

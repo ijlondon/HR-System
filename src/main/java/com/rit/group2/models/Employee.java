@@ -141,6 +141,10 @@ public class Employee {
 		return basicWorkers;
 	}
 	
+	public Set<Employee> fetchRawWorkers(){
+		return workers;
+	}
+	
 	public void setWorkers(Set<Employee> workers){
 		this.workers = workers;
 	}

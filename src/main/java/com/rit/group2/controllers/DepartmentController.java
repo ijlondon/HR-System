@@ -15,7 +15,7 @@ import com.rit.group2.services.DepartmentService;
 
 @RestController()
 @RequestMapping(value = "/department")
-@CrossOrigin(origins = {"${settings.cors_origin}"})
+//@CrossOrigin(origins = {"${settings.cors_origin}"})
 @EnableAutoConfiguration
 public class DepartmentController {
 
