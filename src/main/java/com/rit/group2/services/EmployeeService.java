@@ -156,11 +156,14 @@ public class EmployeeService {
 		if(employeeEdits.getEmail() != null){
 			originalEmployee.setEmail(employeeEdits.getEmail());
 		}
+		if(employeeEdits.getJobTitle() != null){
+			originalEmployee.setJobTitle(employeeEdits.getJobTitle());
+		}
 		if(employeeEdits.getSalary() != 0){
 			originalEmployee.setSalary(employeeEdits.getSalary());
 		}
 		if(employeeEdits.getDepartment() != null){
-			Department department = departmentRepository.findById(employeeEdits.getBoss().getId());
+			Department department = departmentRepository.findById(employeeEdits.getDepartment().getId());
 			if (department != null) {
 				originalEmployee.setDepartment(department);
 			}
