@@ -6,6 +6,7 @@ import java.util.Collections;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import com.rit.group2.models.Employee;
@@ -22,8 +23,14 @@ public class GoogleOauth2{
 	private RestTemplate restemplate = new RestTemplate();
 
 	public Employee getEmployeeFromToken(String token){
-
-		UserInfo userInfo = restemplate.getForObject(url + token, UserInfo.class);
+		UserInfo userInfo;
+		
+		try{
+			userInfo = restemplate.getForObject(url + token, UserInfo.class);
+		}catch(HttpClientErrorException e){
+			return null;
+		}
+		
 		System.out.println("User ID: " + userInfo.getId());
 		System.out.println("First Name: " + userInfo.getGiven_name());
 		System.out.println("Last Name: " + userInfo.getFamily_name());

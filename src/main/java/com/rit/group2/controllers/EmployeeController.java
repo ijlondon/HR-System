@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,12 +35,13 @@ public class EmployeeController {
     }
 
 	@RequestMapping(method = RequestMethod.GET, value = "/userInfo")
-    public Response getUserInfo(@RequestParam String token) {
+    public Response getUserInfo(@RequestHeader("Authorization") String token) {
+		System.out.println("********** " + token);
         return employeeService.userInfo(token);
     }
 	
 	@RequestMapping(method = RequestMethod.GET, value = "/canEdit")
-    public Response canEditEmployee(@RequestParam String token, @RequestParam int toModifyId) {
+    public Response canEditEmployee(@RequestHeader("Authorization") String token, @RequestParam int toModifyId) {
         return employeeService.canUserEdit(token, toModifyId);
     }
 	
