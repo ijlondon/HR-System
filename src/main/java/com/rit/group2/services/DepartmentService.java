@@ -6,7 +6,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rit.group2.models.BasicDepartent;
+import com.rit.group2.models.BasicDepartment;
 import com.rit.group2.models.Department;
 import com.rit.group2.models.Employee;
 import com.rit.group2.repositories.DepartmentRepository;
@@ -28,21 +28,28 @@ public class DepartmentService {
 	public Response getDepartment(int departmentId) {
 		Department department = departmentRepository.findById(departmentId);
 		if(department == null){
-			return new ErrorResponse("Can't find department");
+			return new ErrorResponse("Unable to find department");
 		}
-		Set<Employee> workers = departmentRepository.findWorkersByDepatmentId(departmentId);
-		return new SuccessfulResponse("Successfully retreived department", new BasicDepartent(department, workers));
+		Set<Employee> workers = departmentRepository.findWorkersByDepartmentId(departmentId);
+		return new SuccessfulResponse("Successfully retreived department", new BasicDepartment(department, workers));
 	}
 
 	public Response editDepartment(int departmentId, Department departmentEdits) {
-		// TODO Auto-generated method stub
-		return null;
+		Department originalDepartment = departmentRepository.findById(departmentId);
+		if(originalDepartment == null){
+			return new ErrorResponse("Unable to find department");
+		}
+		if(departmentEdits.getName() != null) {
+			originalDepartment.setName(departmentEdits.getName());
+		}
+		departmentRepository.save(originalDepartment);
+		return new SuccessfulResponse("Successfully edited department", originalDepartment);
 	}
 
 	public Response deleteDepartment(int departmentId) {
 		Department department = departmentRepository.findById(departmentId);
 		if(department == null){
-			return new ErrorResponse("Can't find department");
+			return new ErrorResponse("Unable to find department");
 		}
 		departmentRepository.delete(department);
 		return new SuccessfulResponse("Successfully retreived department", department);

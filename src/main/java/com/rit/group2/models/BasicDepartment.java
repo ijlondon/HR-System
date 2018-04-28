@@ -3,7 +3,7 @@ package com.rit.group2.models;
 import java.util.HashSet;
 import java.util.Set;
 
-public class BasicDepartent {
+public class BasicDepartment {
 
 	private int id;
 	
@@ -11,9 +11,9 @@ public class BasicDepartent {
 	
 	private Set<BasicEmployee> workers;
 	
-	public BasicDepartent(){}
+	public BasicDepartment(){}
 	
-	public BasicDepartent(Department department, Set<Employee> workers){
+	public BasicDepartment(Department department, Set<Employee> workers){
 		this.id = department.getId();
 		this.name = department.getName();
 		

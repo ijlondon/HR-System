@@ -34,7 +34,7 @@ public class EmployeeService {
 
 	public Response init(){
 		Department department1 = new Department("Software Engineering");
-		Department department2 = new Department("Buisness");
+		Department department2 = new Department("Business");
 		Employee employee1 = new Employee("Nathan", "Connor", new Address("1 Road", "Rochester", "NY", 14580), "(585) 760-9040", "nxc5929@rit.edu", department1, 1, "Backend Developer");
 		Employee employee2 = new Employee("Rachel", "Connor", new Address("2 Road", "Rochester", "NY", 14580), "(585) 111-1111", "vfg3453@rit.edu", department1, 1, "Backend Developer");
 		Employee employee3 = new Employee("Brandon", "Connor", new Address("3 Road", "Rochester", "NY", 14580), "(585) 222-2222", "ghr2045@rit.edu", department1, 1, "Backend Developer");
@@ -46,9 +46,14 @@ public class EmployeeService {
 		employee1.addWorker(employee2);
 		employee1.addWorker(employee3);
 		employee1.addWorker(employee4);
+		employee2.setBoss(employee1);
+		employee3.setBoss(employee1);
+		employee4.setBoss(employee1);
 
 		employee5.addWorker(employee6);
 		employee5.addWorker(employee7);
+		employee6.setBoss(employee5);
+		employee7.setBoss(employee5);
 
 		departmentRepository.save(department1);
 		departmentRepository.save(department2);
@@ -73,7 +78,7 @@ public class EmployeeService {
 		if(employee == null){
 			return new ErrorResponse("Unable to find employee");
 		}
-		return new SuccessfulResponse("Successfully found emplyee", employee);
+		return new SuccessfulResponse("Successfully found employee", employee);
 	}
 
 	public Response editEmployee(int employeeId, Employee employeeEdits) {
@@ -105,8 +110,24 @@ public class EmployeeService {
 		if(employeeEdits.getEmail() != null){
 			originalEmployee.setEmail(employeeEdits.getEmail());
 		}
+		if(employeeEdits.getSalary() != 0){
+			originalEmployee.setSalary(employeeEdits.getSalary());
+		}
+		if(employeeEdits.getDepartment() != null){
+			Department department = departmentRepository.findById(employeeEdits.getBoss().getId());
+			if (department != null) {
+				originalEmployee.setDepartment(department);
+			}
+		}
+		if(employeeEdits.getBoss() != null){
+			Employee boss = employeeRepository.findById(employeeEdits.getBoss().getId());
+			if (boss != null) {
+				originalEmployee.setBoss(boss);
+				boss.addWorker(originalEmployee);
+			}
+		}
 		employeeRepository.save(originalEmployee);
-		return new SuccessfulResponse("Succesfully edited Employee", originalEmployee);
+		return new SuccessfulResponse("Succesfully edited employee", originalEmployee);
 	}
 
 	public Response terminateEmployee(int employeeId) {
@@ -116,7 +137,7 @@ public class EmployeeService {
 		}
 		employee.terminate();
 		employeeRepository.save(employee);
-		return new SuccessfulResponse("Successfully terminated Employee", employee);
+		return new SuccessfulResponse("Successfully terminated employee", employee);
 	}
 
 	public Response changeDepartments(int employeeId, int newDepartmentId) {
@@ -124,13 +145,13 @@ public class EmployeeService {
 		Employee employee = employeeRepository.findById(employeeId);
 
 		if(employee == null || department == null){
-			return new ErrorResponse("Employee or Deparment doesn't exist");
+			return new ErrorResponse("Employee or Department doesn't exist");
 		}
 
 		employee.setDepartment(department);
 		employeeRepository.save(employee);
 
-		return new SuccessfulResponse("Not implimented yet", employee);
+		return new SuccessfulResponse("Not implemented yet", employee);
 	}
 
 	public Response search(String searchQuery) {
@@ -195,7 +216,4 @@ public class EmployeeService {
 		}
 		return new SuccessfulResponse("Retrieved all employees", employees);
 	}
-
-
-
 }
