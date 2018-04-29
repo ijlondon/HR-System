@@ -133,6 +133,8 @@ public class EmployeeService {
 		employeeRepository.save(employee17);
 		employeeRepository.save(employee18);
 		employeeRepository.save(employee19);
+		employeeRepository.save(employee20);
+		employeeRepository.save(employee21);
 
 		return new SuccessfulResponse("Successfully init database", null);
 	}
