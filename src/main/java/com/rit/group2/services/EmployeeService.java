@@ -134,7 +134,9 @@ public class EmployeeService {
 
 
 	public Response editEmployee(String token, int employeeId, Employee employeeEdits) {
-		if(canEdit(token, employeeId)){
+		boolean totalEdit = canEdit(token, employeeId);
+		boolean isSelf = isLoggenInEmployee(token, employeeId);
+		if(totalEdit || isSelf){
 			Employee originalEmployee = employeeRepository.findById(employeeId);
 			if(originalEmployee == null){
 				return new ErrorResponse("Unable to find employee");
@@ -160,22 +162,19 @@ public class EmployeeService {
 			if(employeeEdits.getTelephone() != null){
 				originalEmployee.setTelephone(employeeEdits.getTelephone());
 			}
-			if(employeeEdits.getEmail() != null){
-				originalEmployee.setEmail(employeeEdits.getEmail());
-			}
-			if(employeeEdits.getJobTitle() != null){
+			if(employeeEdits.getJobTitle() != null && totalEdit){
 				originalEmployee.setJobTitle(employeeEdits.getJobTitle());
 			}
-			if(employeeEdits.getSalary() != 0){
+			if(employeeEdits.getSalary() != 0 && totalEdit){
 				originalEmployee.setSalary(employeeEdits.getSalary());
 			}
-			if(employeeEdits.getDepartment() != null){
+			if(employeeEdits.getDepartment() != null && totalEdit){
 				Department department = departmentRepository.findById(employeeEdits.getDepartment().getId());
 				if (department != null) {
 					originalEmployee.setDepartment(department);
 				}
 			}
-			if(employeeEdits.getBoss() != null){
+			if(employeeEdits.getBoss() != null && totalEdit){
 				Employee boss = employeeRepository.findById(employeeEdits.getBoss().getId());
 				if (boss != null) {
 					originalEmployee.setBoss(boss);
@@ -251,12 +250,19 @@ public class EmployeeService {
 		return new SuccessfulResponse("Found " + employeesFound.size() + " matches", employeesFound);
 	}
 
-	public boolean canEdit(String userToken, int userToModifyId){
+	private boolean canEdit(String userToken, int userToModifyId){
 		Employee loggedInEmployee = googleSecurityService.getEmployeeFromToken(userToken);
+		if(loggedInEmployee.getAdmin()){
+			return true;
+		}
 		if(loggedInEmployee != null){
 			return findIfBelow(loggedInEmployee, userToModifyId);
 		}
 		return false;
+	}
+	
+	private boolean isLoggenInEmployee(String userToken, int employeeId){
+		return googleSecurityService.getEmployeeFromToken(userToken).getId() == employeeId;
 	}
 
 	public Response canUserEdit(String userToken, int userToModifyId){
