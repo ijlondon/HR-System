@@ -109,25 +109,10 @@ public class EmployeeControllerTest {
 		mvc.perform(
 				post("/employee/0/edit")
 				.contentType(MediaType.APPLICATION_JSON)
+				.header("Authorization", "test")
 				.content(objectMapper.writeValueAsString(employee1))
 				)
 				.andExpect(status().isOk());
-	}
-	
-	@Test
-	public void terminateEmployee() throws Exception{
-		employee1.terminate();
-		Response response = new SuccessfulResponse("Successfully created", employee1);
-		
-		when(employeeService.terminateEmployee(0)).thenReturn(response);
-		System.out.println("Testing /employee/0/terminate");
-		mvc.perform(
-				post("/employee/0/terminate")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(employee1))
-				)
-				.andExpect(status().isOk())
-				.andExpect(jsonPath("data.active", is(false)));
 	}
 	
 	@Test

@@ -10,5 +10,9 @@ How to start the server:
 
 Should probably have other content in this section too
 
+Test Users:
+* un: testboss344@gmail.com pw: password344
+* un: testall344@gmail.com  pw: password344
+
 A big thank you to:
 * me, myself, and I....no, other people really, just us.. #SQUAAAD
