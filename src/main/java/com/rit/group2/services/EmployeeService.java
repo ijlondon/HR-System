@@ -33,6 +33,11 @@ public class EmployeeService {
 
 
 	public Response init(){
+		
+		if(employeeRepository.findByFirstAndLastName("Nathan", "Connor") != null){
+			return new ErrorResponse("Already Init");
+		}
+		
 		Department department1 = new Department("Software Engineering");
 		Department department2 = new Department("Business");
 		Department department3 = new Department("Front End Developer");
