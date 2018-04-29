@@ -11,9 +11,11 @@ public class BasicEmployee {
 	public BasicEmployee(){}
 	
 	public BasicEmployee(Employee employee){
-		this.id = employee.getId();
-		this.firstName = employee.getFirstName();
-		this.lastName = employee.getLastName();
+		if (employee != null) {
+			this.id = employee.getId();
+			this.firstName = employee.getFirstName();
+			this.lastName = employee.getLastName();
+		}
 	}
 
 	public int getId() {

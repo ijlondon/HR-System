@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,11 +24,26 @@ public class EmployeeController {
 	@Autowired
 	public EmployeeService employeeService;
 	
+	@RequestMapping(method = RequestMethod.GET, value = "/init")
+    public Response initEmployees() {
+		return employeeService.init();
+    }
+	
 	@RequestMapping(method = RequestMethod.GET, value = "")
     public Response getAllEmployees() {
 		return employeeService.getAll();
     }
 
+	@RequestMapping(method = RequestMethod.GET, value = "/userInfo")
+    public Response getUserInfo(@RequestHeader("Authorization") String token) {
+        return employeeService.userInfo(token);
+    }
+	
+	@RequestMapping(method = RequestMethod.GET, value = "/canEdit")
+    public Response canEditEmployee(@RequestHeader("Authorization") String token, @RequestParam int toModifyId) {
+        return employeeService.canUserEdit(token, toModifyId);
+    }
+	
 	@RequestMapping(method = RequestMethod.POST, value = "/create")
     public Response createEmployee(@RequestBody Employee employee) {
         return employeeService.createEmployee(employee);

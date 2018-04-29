@@ -5,52 +5,35 @@ import java.util.Set;
 
 public class BasicDepartment {
 
+	private int id;
+	
 	private String name;
-
-	private BasicEmployee head;
-
+	
 	private Set<BasicEmployee> workers;
 	
 	public BasicDepartment(){}
 	
-	public BasicDepartment(String name, BasicEmployee head, Set<BasicEmployee> workers){
-		this.name = name;
-		this.head = head;
-		this.workers = workers;
-	}
-	
-	public BasicDepartment(Department department){
+	public BasicDepartment(Department department, Set<Employee> workers){
+		this.id = department.getId();
 		this.name = department.getName();
-		this.head = new BasicEmployee(department.getHead());
-		Set<BasicEmployee> workers = new HashSet<>();
-		for(Employee employee: department.getWorkers()){
-			workers.add(new BasicEmployee(employee));
+		
+		Set<BasicEmployee> basicWorkers = new HashSet<>();
+		for(Employee employee: workers){
+			basicWorkers.add(new BasicEmployee(employee));
 		}
-		this.workers = workers;
+		this.workers = basicWorkers;
+	}
+
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public BasicEmployee getHead() {
-		return head;
-	}
-
-	public void setHead(BasicEmployee head) {
-		this.head = head;
-	}
-
 	public Set<BasicEmployee> getWorkers() {
 		return workers;
 	}
-
-	public void setWorkers(Set<BasicEmployee> workers) {
-		this.workers = workers;
-	}
-
+	
 }
