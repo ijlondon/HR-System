@@ -126,8 +126,8 @@ public class EmployeeService {
 		}
 		return new SuccessfulResponse("Successfully found employee", employee);
 	}
-	
-	
+
+
 	public Response editEmployee(String token, int employeeId, Employee employeeEdits) {
 		if(canEdit(token, employeeId)){
 			Employee originalEmployee = employeeRepository.findById(employeeId);
@@ -185,23 +185,27 @@ public class EmployeeService {
 		}
 	}
 
-	public Response terminateEmployee(int employeeId) {
-		Employee employee = employeeRepository.findById(employeeId);
-		if(employee == null){
-			return new ErrorResponse("Unable to find employee");
-		}
-		employee.terminate();
-		Employee boss = employee.fetchBoss();
-		if(boss != null){
-			for(Employee worker: employee.fetchRawWorkers()){
-				boss.addWorker(worker);
-				worker.setBoss(boss);
-				employeeRepository.save(worker);
+	public Response terminateEmployee(String userToken, int employeeId) {
+		if(canEdit(userToken, employeeId)){
+			Employee employee = employeeRepository.findById(employeeId);
+			if(employee == null){
+				return new ErrorResponse("Unable to find employee");
 			}
+			employee.terminate();
+			Employee boss = employee.fetchBoss();
+			if(boss != null){
+				for(Employee worker: employee.fetchRawWorkers()){
+					boss.addWorker(worker);
+					worker.setBoss(boss);
+					employeeRepository.save(worker);
+				}
+			}
+			employeeRepository.save(boss);
+			employeeRepository.save(employee);
+			return new SuccessfulResponse("Successfully terminated employee", employee);
+		}else{
+			return new ErrorResponse("Unable to edit this employee. Invalid authentication");
 		}
-		employeeRepository.save(boss);
-		employeeRepository.save(employee);
-		return new SuccessfulResponse("Successfully terminated employee", employee);
 	}
 
 	public Response changeDepartments(int employeeId, int newDepartmentId) {

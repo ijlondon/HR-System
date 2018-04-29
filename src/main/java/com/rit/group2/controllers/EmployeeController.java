@@ -64,8 +64,11 @@ public class EmployeeController {
     }
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/{employeeId}/terminate")
-    public Response terminateEmployee(@PathVariable("employeeId") int employeeId) {
-        return employeeService.terminateEmployee(employeeId);
+    public Response terminateEmployee(
+    		@RequestHeader("Authorization") String token,
+    		@PathVariable("employeeId") int employeeId
+    		) {
+        return employeeService.terminateEmployee(token, employeeId);
     }
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/{employeeId}/changeDepartment")
