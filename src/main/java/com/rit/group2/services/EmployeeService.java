@@ -50,7 +50,7 @@ public class EmployeeService {
 		employee3.setBoss(employee1);
 		employee4.setBoss(employee1);
 		
-		Employee employee5 = new Employee("Kaylie", "Glynn", new Address("5 Road", "Rochester", "NY", 14580), "(585) 444-4444", "dummy@gmail.com", department2, 80671, "Computer Programmers");
+		Employee employee5 = new Employee("Kaylie", "Glynn", new Address("5 Road", "Rochester", "NY", 14580), "(585) 444-4444", "testboss344@gmail.com", department2, 80671, "Computer Programmers");
 		Employee employee6 = new Employee("Dayna", "Cross", new Address("6 Road", "Rochester", "NY", 14580), "(585) 555-5555", "fpo0921@rit.edu", department2, 80672, "Computer Programmers");
 		Employee employee7 = new Employee("Marrie", "Richards", new Address("7 Road", "Rochester", "NY", 14580), "(585) 666-6666", "psk0937@rit.edu", department2, 80673, "Computer Programmers");
 		employee5.addWorker(employee6);
@@ -59,7 +59,7 @@ public class EmployeeService {
 		employee7.setBoss(employee5);
 		
 		Employee employee8 = new Employee("Alex", "Christodoulou", new Address("8 Road", "Rochester", "NY", 14580), "(585) 888-8888", "amc8391@g.rit.edu", department3, 99130, "Web Developers");
-		Employee employee9 = new Employee("Dan", "Krutz", new Address("2 Road", "Rochester", "NY", 14580), "(585) 111-1111", "fjr9554@rit.edu", department3, 47780, "Technical Writers");
+		Employee employee9 = new Employee("Dan", "Krutz", new Address("2 Road", "Rochester", "NY", 14580), "(585) 111-1111", "dxkvse@g.rit.edu", department3, 47780, "Technical Writers");
 		Employee employee10 = new Employee("Micheal", "Evans", new Address("3 Road", "Rochester", "NY", 14580), "(585) 222-2222", "rpe0495@rit.edu", department3, 27910, "Interpreters and Translators");
 		employee8.addWorker(employee9);
 		employee8.addWorker(employee10);
@@ -90,8 +90,8 @@ public class EmployeeService {
 		employee18.setBoss(employee17);
 		employee19.setBoss(employee17);
 
-		Employee employee0 = new Employee("Tom", "Selleck", new Address("1 Drive", "Rochester", "NY", 14580), "(585) 760-9050", "dummytxs@google.com", department0, 277800, "Chief Executives");
-		Employee employee20 = new Employee("Betty", "White", new Address("2 Drive", "Rochester", "NY", 14580), "(585) 760-9051", "bxw@rit.edu", department0, 215180, "Computer and Information Systems Managers");
+		Employee employee0 = new Employee("Tom", "Selleck", new Address("1 Drive", "Rochester", "NY", 14580), "(585) 760-9050", "selleckt3@gmail.com", department0, 277800, "Chief Executives");
+		Employee employee20 = new Employee("Betty", "White", new Address("2 Drive", "Rochester", "NY", 14580), "(585) 760-9051", "testall344@gmail.com", department0, 215180, "Computer and Information Systems Managers");
 		Employee employee21 = new Employee("Tony", "Tony", new Address("3 Drive", "Rochester", "NY", 14580), "(585) 760-9052", "txs@rit.edu", department0, 215180, "Computer and Information Systems Managers");
 		employee20.setAdmin(true);
 		employee21.setAdmin(true);
