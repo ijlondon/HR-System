@@ -7,6 +7,8 @@ public class UserInfo {
 	private String given_name;
 	
 	private String family_name;
+	
+	private String email;
 
 	public String getId() {
 		return id;
@@ -19,5 +21,11 @@ public class UserInfo {
 	public String getFamily_name() {
 		return family_name;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+	
+	
 	
 }

@@ -15,4 +15,7 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
 
 	@Query("select e from Employee e where e.firstName = :fname AND e.lastName = :lname")
 	Employee findByFirstAndLastName(@Param("fname") String firstName, @Param("lname") String lastName);
+
+	@Query("select e from Employee e where e.email = :email")
+	Employee findByEmail(@Param("email") String email);
 }
