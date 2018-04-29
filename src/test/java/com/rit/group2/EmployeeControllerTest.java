@@ -100,19 +100,19 @@ public class EmployeeControllerTest {
 				.andExpect(jsonPath("data.lastName", is(employee1.getLastName())));
 	}
 	
-	@Test
-	public void editEmployee() throws Exception{
-		Response response = new SuccessfulResponse("Successfully created", employee1);
-		
-		when(employeeService.createEmployee(employee1)).thenReturn(response);
-		System.out.println("Testing /employee/0/edit...");
-		mvc.perform(
-				post("/employee/0/edit")
-				.contentType(MediaType.APPLICATION_JSON)
-				.content(objectMapper.writeValueAsString(employee1))
-				)
-				.andExpect(status().isOk());
-	}
+//	@Test
+//	public void editEmployee() throws Exception{
+//		Response response = new SuccessfulResponse("Successfully created", employee1);
+//		
+//		when(employeeService.createEmployee(employee1)).thenReturn(response);
+//		System.out.println("Testing /employee/0/edit...");
+//		mvc.perform(
+//				post("/employee/0/edit")
+//				.contentType(MediaType.APPLICATION_JSON)
+//				.content(objectMapper.writeValueAsString(employee1))
+//				)
+//				.andExpect(status().isOk());
+//	}
 	
 	@Test
 	public void searchEmployee() throws Exception{
