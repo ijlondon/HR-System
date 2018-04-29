@@ -138,6 +138,7 @@ public class Employee {
 	
 	public void terminate(){
 		this.active = false;
+		this.workers = new HashSet<>();
 	}
 	
 	public boolean getAdmin(){
@@ -150,6 +151,10 @@ public class Employee {
 
 	public BasicEmployee getBoss() {
 		return new BasicEmployee(boss);
+	}
+	
+	public Employee fetchBoss(){
+		return boss;
 	}
 
 	public void setBoss(Employee boss){

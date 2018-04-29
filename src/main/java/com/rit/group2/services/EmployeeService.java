@@ -173,6 +173,7 @@ public class EmployeeService {
 			if (boss != null) {
 				originalEmployee.setBoss(boss);
 				boss.addWorker(originalEmployee);
+				employeeRepository.save(boss);
 			}
 		}
 		employeeRepository.save(originalEmployee);
@@ -185,6 +186,15 @@ public class EmployeeService {
 			return new ErrorResponse("Unable to find employee");
 		}
 		employee.terminate();
+		Employee boss = employee.fetchBoss();
+		if(boss != null){
+			for(Employee worker: employee.fetchRawWorkers()){
+				boss.addWorker(worker);
+				worker.setBoss(boss);
+				employeeRepository.save(worker);
+			}
+		}
+		employeeRepository.save(boss);
 		employeeRepository.save(employee);
 		return new SuccessfulResponse("Successfully terminated employee", employee);
 	}
