@@ -95,6 +95,7 @@ public class EmployeeService {
 		Employee employee21 = new Employee("Tony", "Tony", new Address("3 Drive", "Rochester", "NY", 14580), "(585) 760-9052", "txs@rit.edu", department0, 215180, "Computer and Information Systems Managers");
 		employee20.setAdmin(true);
 		employee21.setAdmin(true);
+		employee0.setAdmin(true);
 		employee0.addWorker(employee1);
 		employee0.addWorker(employee5);
 		employee0.addWorker(employee8);
