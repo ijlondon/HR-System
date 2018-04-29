@@ -56,10 +56,11 @@ public class EmployeeController {
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/{employeeId}/edit")
     public Response editEmployee(
+    		@RequestHeader("Authorization") String token,
     		@PathVariable("employeeId") int employeeId,
     		@RequestBody Employee employeeEdits
     		) {
-        return employeeService.editEmployee(employeeId, employeeEdits);
+        return employeeService.editEmployee(token, employeeId, employeeEdits);
     }
 	
 	@RequestMapping(method = RequestMethod.POST, value = "/{employeeId}/terminate")

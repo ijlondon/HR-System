@@ -22,13 +22,13 @@ public class EmployeeService {
 
 	@Autowired
 	EmployeeRepository employeeRepository;
-	
+
 	@Autowired 
 	DepartmentRepository departmentRepository;
 
 	@Autowired
 	GoogleOauth2 googleSecurityService;
-	
+
 	public EmployeeService(){}
 
 
@@ -36,7 +36,7 @@ public class EmployeeService {
 		Department department1 = new Department("Software Engineering");
 		Department department2 = new Department("Business");
 		Department department3 = new Department("Front End Developer");
-		
+
 		Employee employee1 = new Employee("Nathan", "Connor", new Address("1 Road", "Rochester", "NY", 14580), "(585) 760-9040", "nxc5929@rit.edu", department1, 1, "Backend Developer");
 		Employee employee2 = new Employee("Rachel", "Connor", new Address("2 Road", "Rochester", "NY", 14580), "(585) 111-1111", "vfg3453@rit.edu", department1, 1, "Backend Developer");
 		Employee employee3 = new Employee("Brandon", "Connor", new Address("3 Road", "Rochester", "NY", 14580), "(585) 222-2222", "ghr2045@rit.edu", department1, 1, "Backend Developer");
@@ -47,7 +47,7 @@ public class EmployeeService {
 		employee2.setBoss(employee1);
 		employee3.setBoss(employee1);
 		employee4.setBoss(employee1);
-		
+
 		Employee employee5 = new Employee("Kaylie", "Glynn", new Address("5 Road", "Rochester", "NY", 14580), "(585) 444-4444", "nfe3920@rit.edu", department2, 1, "Backend Developer");
 		Employee employee6 = new Employee("Dayna", "Glynn", new Address("6 Road", "Rochester", "NY", 14580), "(585) 555-5555", "fpo0921@rit.edu", department2, 1, "Backend Developer");
 		Employee employee7 = new Employee("Marrie", "Glynn", new Address("7 Road", "Rochester", "NY", 14580), "(585) 666-6666", "psk0937@rit.edu", department2, 1, "Backend Developer");
@@ -55,7 +55,7 @@ public class EmployeeService {
 		employee5.addWorker(employee7);
 		employee6.setBoss(employee5);
 		employee7.setBoss(employee5);
-		
+
 		Employee employee8 = new Employee("Alex", "Christodoulou", new Address("8 Road", "Rochester", "NY", 14580), "(585) 888-8888", "alc3259@rit.edu", department3, 10000000, "Front Developer");
 		Employee employee9 = new Employee("Dan", "Krutz", new Address("2 Road", "Rochester", "NY", 14580), "(585) 111-1111", "fjr9554@rit.edu", department3, 1, "Does Things");
 		Employee employee10 = new Employee("Micheal", "Evans", new Address("3 Road", "Rochester", "NY", 14580), "(585) 222-2222", "rpe0495@rit.edu", department3, 1, "Coffee Boy");
@@ -63,7 +63,7 @@ public class EmployeeService {
 		employee8.addWorker(employee10);
 		employee9.setBoss(employee8);
 		employee10.setBoss(employee8);
-		
+
 		Employee employee11 = new Employee("Ian", "London", new Address("8 Road", "Rochester", "NY", 14580), "(585) 888-8888", "alc3259@rit.edu", department3, 10000000, "Front Developer");
 		Employee employee12 = new Employee("Lilly", "Tob", new Address("7 Road", "Rochester", "NY", 14580), "(585) 111-1111", "fjr9554@rit.edu", department3, 1, "Does All The Things");
 		Employee employee13 = new Employee("The Pumpkin", "Man", new Address("1126 Road", "Rochester", "NY", 14580), "(585) 222-2222", "rpe0495@rit.edu", department3, 1, "Water Boy");
@@ -71,7 +71,7 @@ public class EmployeeService {
 		employee11.addWorker(employee13);
 		employee12.setBoss(employee11);
 		employee13.setBoss(employee11);
-		
+
 		Employee employee14 = new Employee("Huseen", "Mahkareem", new Address("3590 Road", "Rochester", "NY", 14580), "(585) 888-8888", "alc3259@rit.edu", department3, 10000000, "Front Developer");
 		Employee employee15 = new Employee("Stock", "Bean", new Address("7 Road", "Rochester", "NY", 14580), "(585) 111-1111", "fjr9554@rit.edu", department3, 1, "TV Watcher");
 		Employee employee16 = new Employee("Apple", "Pie", new Address("1126 Road", "Rochester", "NY", 14580), "(585) 222-2222", "rpe0495@rit.edu", department3, 1, "Beer Boy");
@@ -79,7 +79,7 @@ public class EmployeeService {
 		employee14.addWorker(employee16);
 		employee15.setBoss(employee14);
 		employee16.setBoss(employee14);
-		
+
 		Employee employee17 = new Employee("Peace", "Omiponle", new Address("3890 Road", "Rochester", "NY", 14580), "(585) 888-8888", "alc3259@rit.edu", department3, 10000000, "Front Developer");
 		Employee employee18 = new Employee("Corn", "On The Cob", new Address("7 Road", "Rochester", "NY", 14580), "(585) 111-1111", "fjr9554@rit.edu", department3, 1, "Computer Holder Assistant");
 		Employee employee19 = new Employee("Sweet", "Caroline", new Address("1126 Road", "Rochester", "NY", 14580), "(585) 222-2222", "rpe0495@rit.edu", department3, 1, "Mouse Holder Assistant");
@@ -87,7 +87,7 @@ public class EmployeeService {
 		employee17.addWorker(employee19);
 		employee18.setBoss(employee17);
 		employee19.setBoss(employee17);
-		
+
 		departmentRepository.save(department1);
 		departmentRepository.save(department2);
 		departmentRepository.save(department3);
@@ -127,57 +127,61 @@ public class EmployeeService {
 		return new SuccessfulResponse("Successfully found employee", employee);
 	}
 
-	public Response editEmployee(int employeeId, Employee employeeEdits) {
-		Employee originalEmployee = employeeRepository.findById(employeeId);
-		if(originalEmployee == null){
-			return new ErrorResponse("Unable to find employee");
-		}
-		if(employeeEdits.getFirstName() != null){
-			originalEmployee.setFirstName(employeeEdits.getFirstName());
-		}
-		if(employeeEdits.getLastName() != null){
-			originalEmployee.setLastName(employeeEdits.getLastName());
-		}
-		if(employeeEdits.getAddress().getStreet() != null){
-			originalEmployee.getAddress().setStreet(employeeEdits.getAddress().getStreet());
-		}
-		if(employeeEdits.getAddress().getCity() != null){
-			originalEmployee.getAddress().setCity(employeeEdits.getAddress().getCity());
-		}
-		if(employeeEdits.getAddress().getState() != null){
-			originalEmployee.getAddress().setState(employeeEdits.getAddress().getState());
-		}
-		if(employeeEdits.getAddress().getZip() != 0){
-			originalEmployee.getAddress().setZip(employeeEdits.getAddress().getZip());
-		}
-		if(employeeEdits.getTelephone() != null){
-			originalEmployee.setTelephone(employeeEdits.getTelephone());
-		}
-		if(employeeEdits.getEmail() != null){
-			originalEmployee.setEmail(employeeEdits.getEmail());
-		}
-		if(employeeEdits.getJobTitle() != null){
-			originalEmployee.setJobTitle(employeeEdits.getJobTitle());
-		}
-		if(employeeEdits.getSalary() != 0){
-			originalEmployee.setSalary(employeeEdits.getSalary());
-		}
-		if(employeeEdits.getDepartment() != null){
-			Department department = departmentRepository.findById(employeeEdits.getDepartment().getId());
-			if (department != null) {
-				originalEmployee.setDepartment(department);
+	public Response editEmployee(String token, int employeeId, Employee employeeEdits) {
+		if(canEdit(token, employeeId)){
+			Employee originalEmployee = employeeRepository.findById(employeeId);
+			if(originalEmployee == null){
+				return new ErrorResponse("Unable to find employee");
 			}
-		}
-		if(employeeEdits.getBoss() != null){
-			Employee boss = employeeRepository.findById(employeeEdits.getBoss().getId());
-			if (boss != null) {
-				originalEmployee.setBoss(boss);
-				boss.addWorker(originalEmployee);
-				employeeRepository.save(boss);
+			if(employeeEdits.getFirstName() != null){
+				originalEmployee.setFirstName(employeeEdits.getFirstName());
 			}
+			if(employeeEdits.getLastName() != null){
+				originalEmployee.setLastName(employeeEdits.getLastName());
+			}
+			if(employeeEdits.getAddress().getStreet() != null){
+				originalEmployee.getAddress().setStreet(employeeEdits.getAddress().getStreet());
+			}
+			if(employeeEdits.getAddress().getCity() != null){
+				originalEmployee.getAddress().setCity(employeeEdits.getAddress().getCity());
+			}
+			if(employeeEdits.getAddress().getState() != null){
+				originalEmployee.getAddress().setState(employeeEdits.getAddress().getState());
+			}
+			if(employeeEdits.getAddress().getZip() != 0){
+				originalEmployee.getAddress().setZip(employeeEdits.getAddress().getZip());
+			}
+			if(employeeEdits.getTelephone() != null){
+				originalEmployee.setTelephone(employeeEdits.getTelephone());
+			}
+			if(employeeEdits.getEmail() != null){
+				originalEmployee.setEmail(employeeEdits.getEmail());
+			}
+			if(employeeEdits.getJobTitle() != null){
+				originalEmployee.setJobTitle(employeeEdits.getJobTitle());
+			}
+			if(employeeEdits.getSalary() != 0){
+				originalEmployee.setSalary(employeeEdits.getSalary());
+			}
+			if(employeeEdits.getDepartment() != null){
+				Department department = departmentRepository.findById(employeeEdits.getDepartment().getId());
+				if (department != null) {
+					originalEmployee.setDepartment(department);
+				}
+			}
+			if(employeeEdits.getBoss() != null){
+				Employee boss = employeeRepository.findById(employeeEdits.getBoss().getId());
+				if (boss != null) {
+					originalEmployee.setBoss(boss);
+					boss.addWorker(originalEmployee);
+					employeeRepository.save(boss);
+				}
+			}
+			employeeRepository.save(originalEmployee);
+			return new SuccessfulResponse("Succesfully edited employee", originalEmployee);
+		}else{
+			return new ErrorResponse("Unable to edit this employee. Invalid authentication");
 		}
-		employeeRepository.save(originalEmployee);
-		return new SuccessfulResponse("Succesfully edited employee", originalEmployee);
 	}
 
 	public Response terminateEmployee(int employeeId) {
@@ -237,16 +241,25 @@ public class EmployeeService {
 		return new SuccessfulResponse("Found " + employeesFound.size() + " matches", employeesFound);
 	}
 
-	public Response canUserEdit(String userToken, int userToModifyId){
+	public boolean canEdit(String userToken, int userToModifyId){
 		Employee loggedInEmployee = googleSecurityService.getEmployeeFromToken(userToken);
 		if(loggedInEmployee != null){
-			boolean canEdit = findIfBelow(loggedInEmployee, userToModifyId);
-			return new SuccessfulResponse("Successfully found user", canEdit);
+			return findIfBelow(loggedInEmployee, userToModifyId);
+		}
+		return false;
+	}
+
+	public Response canUserEdit(String userToken, int userToModifyId){
+		boolean canEdit = canEdit(userToken, userToModifyId);
+		if(canEdit){
+			return new SuccessfulResponse("Successfully found user", true);
 		}else{
-			return new SuccessfulResponse("Successfully found user", false);
+			return new SuccessfulResponse("Unable to Edit", false);
 		}
 	}
-	
+
+
+
 	private boolean findIfBelow(Employee bossEmployee, int userToModifyId) {
 		for(Employee worker: bossEmployee.fetchRawWorkers()){
 			if(worker.getId() == userToModifyId){
