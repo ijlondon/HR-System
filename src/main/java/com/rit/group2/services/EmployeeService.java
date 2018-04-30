@@ -204,9 +204,11 @@ public class EmployeeService {
 				if (boss != null) {
 					originalEmployee.setBoss(boss);
 					boss.addWorker(originalEmployee);
+					System.out.println("Adding Boss");
 					employeeRepository.save(boss);
 				}
 			}
+			System.out.println("Adding Employee");
 			employeeRepository.save(originalEmployee);
 			return new SuccessfulResponse("Succesfully edited employee", originalEmployee);
 		}else{
