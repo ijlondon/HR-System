@@ -33,9 +33,8 @@ public class EmployeeService {
 
 
 	public Response init(){
-		if(employeeRepository.findByFirstAndLastName("Nathan", "Connor") != null){
-			return new ErrorResponse("Already Init");
-		}
+		employeeRepository.deleteAll();
+		departmentRepository.deleteAll();
 
 		Department department0 = new Department("Administration");		
 		Department department1 = new Department("Software Engineering");
@@ -234,12 +233,19 @@ public class EmployeeService {
 			employee.terminate();
 			Employee boss = employee.fetchBoss();
 			if(boss != null){
-				for(Employee worker: employee.fetchRawWorkers()){
+				boss.removeWorker(employee);
+				employee.setBoss(null);
+				Set<Employee> workers = employee.fetchRawWorkers();
+				employee.clearAllWorkers();
+				employeeRepository.save(employee);
+				
+				for(Employee worker: workers){
 					boss.addWorker(worker);
 					worker.setBoss(boss);
 					employeeRepository.save(worker);
 				}
 			}
+			
 			employeeRepository.save(boss);
 			employeeRepository.save(employee);
 			return new SuccessfulResponse("Successfully terminated employee", employee);
