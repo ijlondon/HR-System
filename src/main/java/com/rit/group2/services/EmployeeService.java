@@ -201,6 +201,11 @@ public class EmployeeService {
 			}
 			if(employeeEdits.getBoss() != null && totalEdit){
 				Employee boss = employeeRepository.findById(employeeEdits.getBoss().getId());
+				Employee orignalBoss = originalEmployee.fetchBoss();
+				if(orignalBoss != null){
+					orignalBoss.removeWorker(originalEmployee);
+					employeeRepository.save(orignalBoss);
+				}
 				if (boss != null) {
 					originalEmployee.setBoss(boss);
 					boss.addWorker(originalEmployee);

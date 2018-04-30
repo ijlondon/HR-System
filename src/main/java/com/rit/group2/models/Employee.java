@@ -46,7 +46,7 @@ public class Employee {
 	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Employee boss;
 
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Set<Employee> workers;
 	
 	public Employee(){
