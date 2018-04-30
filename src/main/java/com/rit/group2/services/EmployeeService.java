@@ -201,12 +201,19 @@ public class EmployeeService {
 			}
 			if(employeeEdits.getBoss() != null && totalEdit){
 				Employee boss = employeeRepository.findById(employeeEdits.getBoss().getId());
+				Employee orignalBoss = originalEmployee.fetchBoss();
+				if(orignalBoss != null){
+					orignalBoss.removeWorker(originalEmployee);
+					employeeRepository.save(orignalBoss);
+				}
 				if (boss != null) {
 					originalEmployee.setBoss(boss);
 					boss.addWorker(originalEmployee);
+					System.out.println("Adding Boss");
 					employeeRepository.save(boss);
 				}
 			}
+			System.out.println("Adding Employee");
 			employeeRepository.save(originalEmployee);
 			return new SuccessfulResponse("Succesfully edited employee", originalEmployee);
 		}else{
