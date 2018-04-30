@@ -234,22 +234,20 @@ public class EmployeeService {
 			employee.terminate();
 			Employee boss = employee.fetchBoss();
 			if(boss != null){
+				boss.removeWorker(employee);
+				employee.setBoss(null);
 				Set<Employee> workers = employee.fetchRawWorkers();
 				employee.clearAllWorkers();
-				System.out.println("Saving Employee");
 				employeeRepository.save(employee);
+				
 				for(Employee worker: workers){
 					boss.addWorker(worker);
 					worker.setBoss(boss);
-					System.out.println("Saving Worker");
 					employeeRepository.save(worker);
 				}
 			}
 			
-			System.out.println("Saving Boss");
 			employeeRepository.save(boss);
-			
-			System.out.println("Saving Employee");
 			employeeRepository.save(employee);
 			return new SuccessfulResponse("Successfully terminated employee", employee);
 		}else{
