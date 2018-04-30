@@ -139,6 +139,9 @@ public class Employee {
 	
 	public void terminate(){
 		this.active = false;
+	}
+	
+	public void clearAllWorkers(){
 		this.workers = new HashSet<>();
 	}
 	

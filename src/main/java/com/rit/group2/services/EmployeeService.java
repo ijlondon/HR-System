@@ -236,6 +236,7 @@ public class EmployeeService {
 					employeeRepository.save(worker);
 				}
 			}
+			employee.clearAllWorkers();
 			employeeRepository.save(boss);
 			employeeRepository.save(employee);
 			return new SuccessfulResponse("Successfully terminated employee", employee);
