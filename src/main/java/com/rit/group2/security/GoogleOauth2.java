@@ -31,10 +31,6 @@ public class GoogleOauth2{
 			return null;
 		}
 		
-		System.out.println("User ID: " + userInfo.getId());
-		System.out.println("First Name: " + userInfo.getGiven_name());
-		System.out.println("Last Name: " + userInfo.getFamily_name());
-
 		if(userInfo.getId() != null){
 			String email = userInfo.getEmail();
 			return employeeRespository.findByEmail(email);
