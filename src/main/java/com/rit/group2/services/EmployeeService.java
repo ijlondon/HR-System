@@ -33,9 +33,8 @@ public class EmployeeService {
 
 
 	public Response init(){
-		if(employeeRepository.findByFirstAndLastName("Nathan", "Connor") != null){
-			return new ErrorResponse("Already Init");
-		}
+		employeeRepository.deleteAll();
+		departmentRepository.deleteAll();
 
 		Department department0 = new Department("Administration");		
 		Department department1 = new Department("Software Engineering");
