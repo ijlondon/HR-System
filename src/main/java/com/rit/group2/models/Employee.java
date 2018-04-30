@@ -42,7 +42,7 @@ public class Employee {
 
 	private boolean admin;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Employee boss;
 
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
